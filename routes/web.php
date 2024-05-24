@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ContactUsController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\MoneyTransferController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -29,6 +30,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::get('test', function () {
+    // return adminDbTablesPermissions();
+});
+
 Route::get('/index', function () {
 
     return view('welcome');
@@ -47,6 +53,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     });
 
     Route::get('/', DashbaordController::class)->name('main');
+
+    // ----------------- Permissions -----------------
+    Route::resource('permissions', PermissionController::class);
+    // ----------------- Permissions -----------------
+
+
+
+
 
     // ----------------- Containers -----------------
     Route::resource('containers', ContainerController::class);

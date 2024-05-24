@@ -24,11 +24,11 @@ return [
     'reviews'       => 'التقييمات',
     'settings'      => 'الإعدادات',
     'contactUs'     => 'اتصل بنا',
-    'transportations'           =>'النقل',
-    'transportation'=>'النقل',
-    'website_setting'           =>'إعدادات الموقع',
+    'transportations'           => 'النقل',
+    'transportation' => 'النقل',
+    'website_setting'           => 'إعدادات الموقع',
     'cities_and_regions'        => 'المدن و المناطق',
-    'shippingAgents'=> 'التوكيلات الملاحية',
+    'shippingAgents' => 'التوكيلات الملاحية',
     'shippingAgent' => 'توكيل ملاحى',
     'companyTransportations'    => 'عروض الأسعار',
     'companyTransportation'     => 'عرض سعر',
@@ -58,18 +58,20 @@ return [
 
     // ------------------ Main ------------------
 
-   "spend_money" =>  "أنفق مبلغًا قيمته :value من حسابك المالي",
-    "transfer_money"=> "قم بتحويل مبلغ قيمته :value إلى :name",
-    "agent_done_specification"=> "تم تحديد حاوية برقم :container_no",
-    "agent_done_loading"=> "تم تحميل حاوية برقم :container_no",
-    "agent_done_unloading"=> "تم تفريغ حاوية برقم :container_no",
-    "unknown_container_status"=> "حالة غير معروفة للحاوية برقم :container_no",
+    "spend_money" =>  "أنفق مبلغًا قيمته :value من حسابك المالي",
+    "transfer_money" => "قم بتحويل مبلغ قيمته :value إلى :name",
+    "agent_done_specification" => "تم تحديد حاوية برقم :container_no",
+    "agent_done_loading" => "تم تحميل حاوية برقم :container_no",
+    "agent_done_unloading" => "تم تفريغ حاوية برقم :container_no",
+    "unknown_container_status" => "حالة غير معروفة للحاوية برقم :container_no",
     "date" => "التاريخ",
     "time" => "الوقت",
     "daily_reports" => "التقارير اليومية",
     "expenses" => "المصاريف",
 
+    "permissions" => "الصلاحيات",
+    "back" => "عودة"
+
 
 
 ];
-

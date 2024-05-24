@@ -1,11 +1,12 @@
 <?php
 
-use App\Enums\BookingActionsEnum;
-use App\Models\Company;
-use App\Models\Container;
-use App\Models\Factory;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
+use App\Models\Company;
+use App\Models\Factory;
+use App\Models\Container;
+use Illuminate\Support\Str;
+use App\Enums\BookingActionsEnum;
+use Illuminate\Support\Facades\DB;
 
 if(!function_exists('companies')){
     /**
@@ -92,8 +93,34 @@ if(!function_exists('adminDbTablesPermissions')){
      */
     function adminDbTablesPermissions(){
         $adminPermissions = [
-            'users', 'containers', 'employees', 'bookings', 'factories', 'branches', 'companies'
+            'companies',
+            'superagents',
+            'agents',
+            'drivers',
+            'cars',
+            'employees', 
+            'factories', 
+            'branches', 
+            'cities',
+            'containers', 
+            'serviceCategories',
+            'services',
+            'shippingAgents',
+            'staticPages',
+            'ourServices',
+            'chooseUs',
+            'sponsers',
+            'reviews',
+            'settings',
+            'contactUs',
+            'users', 
+            'bookings', 
+            'yards',
+            'daily_reports',
+            'financial_custody_agents',
+            'permissions'
         ];
+
 
         return $adminPermissions;
     }

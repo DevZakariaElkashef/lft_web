@@ -24,12 +24,12 @@ return [
     'reviews'       => 'Reviews',
     'settings'      => 'Settings',
     'contactUs'     => 'Contact Us',
-    'transportations'=>'Transprotations',
-    'transportation'=>'Transprotation',
-    'website_setting'=> 'Website setting',
+    'transportations' => 'Transprotations',
+    'transportation' => 'Transprotation',
+    'website_setting' => 'Website setting',
     'cities_and_regions'    => 'Cities & Regions',
 
-    'ShippingAgents'=> 'Shipping Agents',
+    'ShippingAgents' => 'Shipping Agents',
     'ShippingAgent' => 'Shipping Agent',
 
     'serviceCategories' => 'Service Categories',
@@ -42,7 +42,9 @@ return [
     'password'     => 'Password',
     'cnf_password' => 'Confirmation Password',
     "expenses"     => "Expenses",
+
+    "permissions" => "Permissions",
+    "back" => "Back"
     // ------------------ Main ------------------
 
 ];
-
