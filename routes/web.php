@@ -1,23 +1,24 @@
 <?php
 
 
-use App\Http\Controllers\Admin\AgentController;
-use App\Http\Controllers\Admin\BookingController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CarController;
-use App\Http\Controllers\Admin\CompanyServicesController;
-use App\Http\Controllers\Admin\CompanyTransportationController;
-use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\YardController;
+use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\DriverController;
-use App\Http\Controllers\Admin\ExpenseController;
-use App\Http\Controllers\Admin\MoneyTransferController;
-use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\ReportController;
-use App\Http\Controllers\Admin\ServiceCategoryController;
+use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ContactUsController;
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\SuperagentController;
-use App\Http\Controllers\Admin\YardController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\MoneyTransferController;
+use App\Http\Controllers\Admin\CompanyServicesController;
+use App\Http\Controllers\Admin\ServiceCategoryController;
+use App\Http\Controllers\Admin\CompanyTransportationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     // ----------------- Permissions -----------------
     Route::resource('permissions', PermissionController::class);
     // ----------------- Permissions -----------------
+    
+    
+    // ----------------- manageUsers -----------------
+    Route::resource('users', UserController::class);
+    // ----------------- manageUsers -----------------
 
 
 

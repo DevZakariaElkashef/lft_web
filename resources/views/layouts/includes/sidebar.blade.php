@@ -421,12 +421,56 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
+                        <span class="svg-icon menu-icon">
+                            <i class="fas fa-users"></i>
+                        </span>
+                        <span class="menu-text">{{ __('main.manage_users') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu">
+                        <i class="menu-arrow"></i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                <span class="menu-link">
+                                    <span class="menu-text">{{ __('main.manage_users') }}</span>
+                                </span>
+                            </li>
+
+
+
+                            @foreach (\Spatie\Permission\Models\Role::all() as $role)
+                                <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                    data-menu-toggle="hover">
+                                    <a href="{{ route('users.index', ['role' => $role->name]) }}"
+                                        id="static-pages-link" class="menu-link">
+                                        <span class="menu-text">{{ $role->name }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                            <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                data-menu-toggle="hover">
+                                <a href="{{ route('users.index') }}" id="static-pages-link" class="menu-link">
+                                    <span class="menu-text">{{ __("main.They_don't_have_roles") }}</span>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </li>
                 @if (auth()->user()->hasPermissionTo('permissions.index'))
                     <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 
                         <a href="{{ route('permissions.index') }}" id="permissions-link" class="menu-link">
                             <span class="svg-icon menu-icon text-muted">
-															<svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#b5b5c3" d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    <path fill="#b5b5c3"
+                                        d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z" />
+                                </svg>
                             </span>
                             <span class="menu-text">{{ __('main.permissions') }}</span>
                         </a>

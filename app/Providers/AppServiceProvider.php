@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\BookingContainer;
 use App\Observers\BookingContainerObserver;
 use App\Observers\BookingObserver;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

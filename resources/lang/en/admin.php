@@ -407,4 +407,6 @@ return [
     'permissions.create' => 'Create Permission',
     'permissions.update' => 'Update Permission',
     'permissions.delete' => 'Delete Permission',
+    "role" => 'Role',
+    "password" => 'Password',
 ];

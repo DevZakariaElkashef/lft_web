@@ -70,7 +70,9 @@ return [
     "expenses" => "المصاريف",
 
     "permissions" => "الصلاحيات",
-    "back" => "عودة"
+    "back" => "عودة",
+    "manage_users" => "إدارة المستخدمين",
+    "They_don't_have_roles" => "ليس لديهم أدوار"
 
 
 

@@ -44,7 +44,9 @@ return [
     "expenses"     => "Expenses",
 
     "permissions" => "Permissions",
-    "back" => "Back"
+    "back" => "Back",
+    "manage_users" => "Manage Users",
+    "They_don't_have_roles" => "They don't have roles"
     // ------------------ Main ------------------
 
 ];

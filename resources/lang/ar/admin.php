@@ -440,4 +440,6 @@ return [
     'permissions.create' => 'إنشاء إذن',
     'permissions.update' => 'تحديث إذن',
     'permissions.delete' => 'حذف إذن',
+    "role" => "الدور",
+    "password" => 'كلمة المرور'
 ];
