@@ -19,92 +19,87 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('token_ininvalid', [ProfileController::class, 'token_ininvalid'])->name("token_ininvalid");
 
-Route::group(['middleware' => 'localization'], function(){
+Route::group(['middleware' => 'localization'], function () {
 
-    Route::group(['middleware' => 'guest:superagent'], function(){
+    Route::group(['middleware' => 'guest:superagent'], function () {
 
-    //login
+        //login
 
-    Route::post('login', [LoginController::class, 'login']);
+Route::post('login', [LoginController::class, 'login']);
 
-    //set password
-    Route::post('set_password', [SetPasswordController::class, 'set_password']);
+        //set password
+        Route::post('set_password', [SetPasswordController::class, 'set_password']);
 
         Route::post('sendOtp', [OtpController::class, 'sendOtp']);
         Route::post('verifyOtp', [OtpController::class, 'verifyOtp']);
         Route::post('resetPassword', [OtpController::class, 'resetPassword']);
     });
-    Route::group(['middleware' => 'auth:superagent'], function(){
+    Route::group(['middleware' => 'auth:superagent'], function () {
 
 
-    //fetch_profile
-    Route::get('fetch_profile', [ProfileController::class, 'fetch_profile']);
+        //fetch_profile
+        Route::get('fetch_profile', [ProfileController::class, 'fetch_profile']);
 
-    //update_profile
-    Route::post('update_profile', [ProfileController::class, 'update_profile']);
+        //update_profile
+        Route::post('update_profile', [ProfileController::class, 'update_profile']);
 
-    //change_password
-    Route::post('change_password', [ChangePasswordController::class, 'change_password']);
+        //change_password
+        Route::post('change_password', [ChangePasswordController::class, 'change_password']);
 
-     //logout
-     Route::get('logout', [LoginController::class, 'logout']);
+        //logout
+        Route::get('logout', [LoginController::class, 'logout']);
 
-     //home
-     Route::get('fetch_home', [HomeController::class, 'fetch_home']);
-
-
-    //booking_containers
-    Route::group(['controller' => BookingContainerController::class], function () {
-
-    Route::get("booking/specification", "specification");
-
-    Route::get("booking/loading", "loading");
-
-    Route::get("booking/unloading", "unloading");
-
-    });
-
-    //agents
-    Route::group(['controller' => AgentController::class], function () {
-
-        Route::post("booking/fetch_agents", "fetch_agents");
-
-        Route::post("booking/assign_agents", "assign_agents");
-        Route::post("booking/assign_specification_booking", "assign_specification_booking");
+        //home
+        Route::get('fetch_home', [HomeController::class, 'fetch_home']);
 
 
+        //booking_containers
+        Route::group(['controller' => BookingContainerController::class], function () {
+
+            Route::get("booking/specification", "specification");
+
+            Route::get("booking/loading", "loading");
+
+            Route::get("booking/unloading", "unloading");
         });
 
-       //booking container actions
-       Route::group(['controller' => BookingContainerActionController::class], function () {
+        //agents
+        Route::group(['controller' => AgentController::class], function () {
 
-        Route::post("booking/done_specification", "done_specification");
+            Route::post("booking/fetch_agents", "fetch_agents");
 
-        Route::post("booking/done_loading", "done_loading");
-
-
-        Route::post("booking/done_unloading", "done_unloading");
-
-        Route::post("booking/make_it_today", "make_it_today");
-        Route::post("booking/make_specification_today", "make_specification_today");
-
-        Route::post("booking/notes", "notes");
-
+            Route::post("booking/assign_agents", "assign_agents");
+            Route::post("booking/assign_specification_booking", "assign_specification_booking");
         });
 
-       //agents
-       Route::group(['controller' => ShippingAgentController::class], function () {
+        //booking container actions
+        Route::group(['controller' => BookingContainerActionController::class], function () {
 
-       Route::post("booking/save_specification_booking_yard", "save_specification_booking_yard");
+            Route::post("booking/done_specification", "done_specification");
 
-        Route::get("booking/specification_assignments", "specification_assignments");
+            Route::post("booking/done_loading", "done_loading");
 
-        Route::get("booking/unloading_assignments", "unloading_assignments");
 
-        Route::get("booking/loading_assignments", "loading_assignments");
+            Route::post("booking/done_unloading", "done_unloading");
 
-        Route::post("booking/save_loading_booking_container", "save_loading_booking_container");
+            Route::post("booking/make_it_today", "make_it_today");
+            Route::post("booking/make_specification_today", "make_specification_today");
 
+            Route::post("booking/notes", "notes");
+        });
+
+        //agents
+        Route::group(['controller' => ShippingAgentController::class], function () {
+
+            Route::post("booking/save_specification_booking_yard", "save_specification_booking_yard");
+
+            Route::get("booking/specification_assignments", "specification_assignments");
+
+            Route::get("booking/unloading_assignments", "unloading_assignments");
+
+            Route::get("booking/loading_assignments", "loading_assignments");
+
+            Route::post("booking/save_loading_booking_container", "save_loading_booking_container");
         });
 
         Route::group(['controller' => NotificationController::class], function () {
@@ -113,12 +108,5 @@ Route::group(['middleware' => 'localization'], function(){
             Route::post("fetch_agents_notifications", "fetch_agents_notifications");
         });
         Route::get('fetch_yards', [YardController::class, 'fetch_yards']);
-
     });
-
-    });
-
-
-
-
-
+});

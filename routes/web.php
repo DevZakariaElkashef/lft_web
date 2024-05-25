@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\ExpenseController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
@@ -59,8 +60,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     // ----------------- Permissions -----------------
     Route::resource('permissions', PermissionController::class);
     // ----------------- Permissions -----------------
-    
-    
+
+
     // ----------------- manageUsers -----------------
     Route::resource('users', UserController::class);
     // ----------------- manageUsers -----------------
@@ -75,6 +76,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
 
     // ----------------- Companies -----------------
     Route::resource('companies', CompanyController::class);
+    Route::get('/company/companyInvoices/{id}', [CompanyController::class, 'companyInvoices'])->name('companyInvoices');
+    Route::get('/company/companyInvoices/create/{id}', [CompanyController::class, 'createcompanyInvoices'])->name('createcompanyInvoices');
+    Route::post('/company/companyInvoices/store', [CompanyController::class, 'storecompanyInvoices'])->name('storecompanyInvoices');
+    Route::get('/company/companyInvoices/filter', [CompanyController::class, 'filtercompanyInvoices'])->name('filtercompanyInvoices');
     Route::get('company/employee/{company}', 'App\Http\Controllers\Admin\CompanyController@getEmployees')->name('company.employee');
     // ----------------- \Companies -----------------
 

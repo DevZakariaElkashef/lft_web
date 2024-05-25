@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Traits;
 
 use App\Models\LogActivity;
@@ -11,7 +12,7 @@ trait ResponseTrait
             'status' => false,
             'errNum' => $errNum,
             'message' => $msg
-        ],$errNum);
+        ], $errNum);
     }
 
     public function validationError($errors)
@@ -19,7 +20,7 @@ trait ResponseTrait
         return response()->json([
             'status' => false,
             'message' => $errors,
-        ],422);
+        ], 422);
     }
 
     public function returnSuccessMessage($msg = "", $errNum = "0000")
@@ -47,7 +48,7 @@ trait ResponseTrait
             'errNum' => "0000",
             'message' => $msg,
             $key => $value
-        ],200);
+        ], 200);
     }
 
     public function returnAllData($data, $msg = "")
@@ -57,7 +58,7 @@ trait ResponseTrait
             'errNum'    => "0000",
             'message'   => $msg,
             'data'      => $data
-        ],200);
+        ], 200);
     }
 
     public function returnCodeAccordingToInput($validator)
@@ -239,7 +240,7 @@ trait ResponseTrait
         else
             return "";
     }
-    public function saveLogActivity($attacher_id, $attacher_type, $log_id, $log_type,$container_status = 0)
+    public function saveLogActivity($attacher_id, $attacher_type, $log_id, $log_type, $container_status = 0)
     {
         $logActivity = new LogActivity();
         $logActivity->attacher_id = $attacher_id;

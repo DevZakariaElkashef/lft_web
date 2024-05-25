@@ -27,8 +27,10 @@ class LoginController extends Controller
                 $agent = auth()->guard('agent')->user();
 
 
-                $agent->update(['session_id' => $token,
-                    'device_token' => $request->device_token ?? ""]);
+                $agent->update([
+                    'session_id' => $token,
+                    'device_token' => $request->device_token ?? ""
+                ]);
 
 
                 return $this->returnAllData(new AgentResource($agent), __('alerts.success'));
@@ -41,9 +43,9 @@ class LoginController extends Controller
             return $this->returnError(401, __('auth.credentials_incorrect'));
         }
     }
-    public function logout() {
+    public function logout()
+    {
         auth()->guard("agent")->logout();
-        return $this->returnSuccessMessage( __('alerts.success'));
-
+        return $this->returnSuccessMessage(__('alerts.success'));
     }
 }

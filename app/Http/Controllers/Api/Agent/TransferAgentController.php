@@ -47,16 +47,15 @@ class TransferAgentController extends Controller
             $data["transferer_id"] = $agent->id;
             $data["transfered_type"] = "App\Models\Agent";
             $data["transfered_id"] = $request->agent_id;
-           $moneyTransfer = MoneyTransfer::create($data);
+            $moneyTransfer = MoneyTransfer::create($data);
 
-            $this->saveLogActivity($agent->id, Agent::class,$moneyTransfer->id,MoneyTransfer::class);
-
+            $this->saveLogActivity($agent->id, Agent::class, $moneyTransfer->id, MoneyTransfer::class);
 
 
             $title = "new Notification";
-            $text ="An amount of money has been transferred to you from $agent->name with a value $value";
+            $text = "An amount of money has been transferred to you from $agent->name with a value $value";
 
-            SaveNotification::create($title, $text, $moneyTransfer->transfered_id, Agent::class,AppNotification::specific);
+            SaveNotification::create($title, $text, $moneyTransfer->transfered_id, Agent::class, AppNotification::specific);
             SendNotification::send($agent->device_token ?? "", $title, $text);
 
             return $this->returnResponseSuccessMessage(__('alerts.success'));

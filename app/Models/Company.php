@@ -31,7 +31,8 @@ class Company extends Authenticatable implements JWTSubject
         'session_id',
         'bill_type',
         'attachments',
-        'invoice_number_auto_increment'
+        'invoice_number_auto_increment',
+        'wallet'
     ];
 
     protected $casts = [
@@ -215,7 +216,12 @@ class Company extends Authenticatable implements JWTSubject
         $this->attributes['password'] = !is_null($password) ? Hash::make($password) : (!is_null($this->password) ? $this->password : null);
     }
 
-    public function invoices(){
+    public function invoices()
+    {
         return $this->hasManyThrough(Invoice::class, Booking::class);
+    }
+    public function companyInvoices()
+    {
+        return $this->hasMany(CompanyInvoices::class);
     }
 }

@@ -151,7 +151,6 @@ Route::group(['middleware' => 'localization'], function () {
 
         Route::get("booking/fetch_booking_containers", "fetch_booking_containers");
         Route::get("booking/fetch_home_statistics", "fetch_home_statistics");
-
     });
 
     //save booking papers

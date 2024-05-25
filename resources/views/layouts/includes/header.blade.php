@@ -49,6 +49,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
     <script src="{{asset('assets/js/jquery-3.5.1.js')}}"></script>
+    
 
     <style>
         .bs-canvas-overlay {

@@ -27,11 +27,12 @@ class CompanyRequest extends FormRequest
     {
         return [
             'name'          => ['required'],
-            'email'         => request()->method() == 'POST' ? ['required', 'email', 'unique:companies,email'] : ['required', 'email', 'unique:companies,email,'.$this->company->id],
+            'wallet'          => ['required'],
+            'email'         => request()->method() == 'POST' ? ['required', 'email', 'unique:companies,email'] : ['required', 'email', 'unique:companies,email,' . $this->company->id],
             'address'       => ['required', 'max:255'],
             'phone'         => ['required', 'numeric', 'digits_between:9,12'],
             'taxed'         => ['required'],
-            'tax_no'        => request()->method() == 'POST' ? ['required', 'numeric', 'min:0', 'unique:companies,tax_no', 'digits_between:1,20'] : ['required', 'numeric', 'min:0', 'unique:companies,tax_no,'.$this->company->id, 'digits_between:1,20'],
+            'tax_no'        => request()->method() == 'POST' ? ['required', 'numeric', 'min:0', 'unique:companies,tax_no', 'digits_between:1,20'] : ['required', 'numeric', 'min:0', 'unique:companies,tax_no,' . $this->company->id, 'digits_between:1,20'],
             'bill_type'     => ['required', 'in:1,2'],
             'attachments'   => ['sometimes', 'nullable'],
             'attachments.*' => ['sometimes', 'nullable', 'mimes:pdf,csv,xls,xlsx,doc,docx,png,jpeg,jpg', 'max:2048'],
@@ -67,8 +68,8 @@ class CompanyRequest extends FormRequest
         return $this->all();
     }
 
-    protected function failedValidation(Validator $validator){
+    protected function failedValidation(Validator $validator)
+    {
         throw new HttpResponseException(redirect()->back()->withErrors($validator->errors())->withInput());
     }
-
 }
