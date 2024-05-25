@@ -1,6 +1,7 @@
 <?php
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\UserController;
@@ -44,7 +45,7 @@ Route::get('/index', function () {
 Auth::routes();
 
 // ----------------- Dashboard -----------------
-Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth', 'role:Admin'], 'prefix' => 'dashboard'], function () {
+Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
 
     Route::get('/language/{locale}', function ($locale) {
         app()->setLocale($locale);

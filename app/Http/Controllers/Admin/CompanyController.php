@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use JWTAuth;
+use App\Models\Company;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyRequest;
-use App\Models\Company;
-use App\Notifications\AssignPasswordNotification;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\AssignPasswordNotification;
 
 class CompanyController extends Controller
 {
@@ -47,7 +48,7 @@ class CompanyController extends Controller
     public function store(CompanyRequest $request)
     {
         $company = Company::create($request->all());
-        $token = \JWTAuth::fromUser($company);
+        $token = JWTAuth::fromUser($company);
         $company->update(array_merge(['session_id' => $token]));
         Notification::send($company, new AssignPasswordNotification($company));
 

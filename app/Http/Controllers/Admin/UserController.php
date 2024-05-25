@@ -58,7 +58,6 @@ class UserController extends Controller
         $role = Role::findOrfail($request->role);
 
         $data = $request->except('role');
-        $data['password'] = Hash::make($request->password);
 
         $user = User::create($data);
 
@@ -116,9 +115,9 @@ class UserController extends Controller
 
         $role = Role::findOrfail($request->role);
 
-        $data = $request->except('role', 'password');
-        if ($request->password) {
-            $data['password'] = Hash::make($request->password);
+        $data = $request->except('role');
+        if (!$request->password) {
+            unset($data['password']);
         }
 
         $user = User::findOrfail($id);

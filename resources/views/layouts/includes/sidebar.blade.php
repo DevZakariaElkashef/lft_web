@@ -50,417 +50,464 @@
                         </a>
                     </li>
 
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-building"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.companies') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                    <span class="menu-link">
-                                        <span class="menu-text">{{ __('main.companies') }}</span>
-                                    </span>
-                                </li>
-                                @if (auth()->user()->hasPermissionTo('companies.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('companies.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.companies') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('superagents.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('superagents.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.superagents') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('agents.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('agents.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.agents') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('drivers.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('drivers.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.drivers') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('cars.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('cars.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.cars') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('employees.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('employees.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.employees') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-industry"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.factories') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                    <span class="menu-link">
-                                        <span class="menu-text">{{ __('main.factories') }}</span>
-                                    </span>
-                                </li>
-                                @can('factories.index')
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('factories.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.factories') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
-
-                                @can('branches.index')
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('branches.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.branches') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-location"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.cities_and_regions') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                    <span class="menu-link">
-                                        <span class="menu-text">{{ __('main.cities_and_regions') }}</span>
-                                    </span>
-                                </li>
-                                @can('cities.index')
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('citiesAndRegions.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.cities_and_regions') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-box"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.containers') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                    <span class="menu-link">
-                                        <span class="menu-text">{{ __('main.containers') }}</span>
-                                    </span>
-                                </li>
-                                @can('containers.index')
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('containers.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.containers') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-box"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.services') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                @can('serviceCategories.index')
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('serviceCategories.index') }}" id="serviceCategories-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.serviceCategories') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
-
-                                @can('services.index')
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('services.index') }}" id="services-link" class="menu-link">
-                                            <span class="menu-text">{{ __('main.services') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
-                                @if (auth()->user()->hasPermissionTo('financial_custody_agents.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('financial_custody_agents.index') }}" id="services-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.financial_custody_agents') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-clipboard-list"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.bookings') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                    <span class="menu-link">
-                                        <span class="menu-text">{{ __('main.bookings') }}</span>
-                                    </span>
-                                </li>
-
-                                @can('bookings.index')
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('bookings.index') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.bookings') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-box"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.reports') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                    <span class="menu-link">
-                                        <span class="menu-text">{{ __('main.reports') }}</span>
-                                    </span>
-                                </li>
-                                @if (auth()->user()->hasPermissionTo('daily_reports.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('reports.daily_reports') }}" class="menu-link">
-                                            <span class="menu-text">{{ __('main.daily_reports') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-cog"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.website_setting') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                    <span class="menu-link">
-                                        <span class="menu-text">{{ __('main.website_setting') }}</span>
-                                    </span>
-                                </li>
-                                @if (auth()->user()->hasPermissionTo('yards.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('yards.index') }}" id="yards-link" class="menu-link">
-                                            <span class="menu-text">{{ __('main.yards') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('shippingAgents.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('shippingAgents.index') }}" id="shippingAgents-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.shippingAgents') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('staticPages.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('staticPages.index') }}" id="static-pages-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.staticPages') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-                                @if (auth()->user()->hasPermissionTo('ourServices.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('ourServices.index') }}" id="our-services-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.ourServices') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('chooseUs.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('chooseUs.index') }}" id="choose-us-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.chooseUs') }}</span>
-                                        </a>
-                                    </li>
-                                @endcan
-
-                                @if (auth()->user()->hasPermissionTo('sponsers.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('sponsers.index') }}" id="sponsers-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.sponsers') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('reviews.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('reviews.index') }}" id="reviews-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.reviews') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('settings.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('settings.edit', 1) }}" id="settings-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.settings') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-
-                                @if (auth()->user()->hasPermissionTo('contactUs.index'))
-                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                        data-menu-toggle="hover">
-                                        <a href="{{ route('contactUs.index') }}" id="Contact-us-link"
-                                            class="menu-link">
-                                            <span class="menu-text">{{ __('main.contactUs') }}</span>
-                                        </a>
-                                    </li>
-                                @endif
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="javascript:;" class="menu-link menu-toggle">
-                        <span class="svg-icon menu-icon">
-                            <i class="fas fa-users"></i>
-                        </span>
-                        <span class="menu-text">{{ __('main.manage_users') }}</span>
-                        <i class="menu-arrow"></i>
-                    </a>
-                    <div class="menu-submenu">
-                        <i class="menu-arrow"></i>
-                        <ul class="menu-subnav">
-                            <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                <span class="menu-link">
-                                    <span class="menu-text">{{ __('main.manage_users') }}</span>
+                    @if (auth()->user()->hasPermissionTo('companies.index') ||
+                            auth()->user()->hasPermissionTo('superagents.index') ||
+                            auth()->user()->hasPermissionTo('agents.index') ||
+                            auth()->user()->hasPermissionTo('agents.index') ||
+                            auth()->user()->hasPermissionTo('drivers.index') ||
+                            auth()->user()->hasPermissionTo('cars.index') ||
+                            auth()->user()->hasPermissionTo('employees.index') ||
+                            auth()->user()->hasPermissionTo('employees.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-building"></i>
                                 </span>
-                            </li>
+                                <span class="menu-text">{{ __('main.companies') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                        <span class="menu-link">
+                                            <span class="menu-text">{{ __('main.companies') }}</span>
+                                        </span>
+                                    </li>
+                                    @if (auth()->user()->hasPermissionTo('companies.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('companies.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.companies') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('superagents.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('superagents.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.superagents') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('agents.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('agents.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.agents') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('drivers.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('drivers.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.drivers') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('cars.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('cars.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.cars') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('employees.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('employees.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.employees') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
 
 
 
-                            @foreach (\Spatie\Permission\Models\Role::all() as $role)
+                    @if (auth()->user()->hasPermissionTo('factories.index') || auth()->user()->hasPermissionTo('branches.index'))
+
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-industry"></i>
+                                </span>
+                                <span class="menu-text">{{ __('main.factories') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                        <span class="menu-link">
+                                            <span class="menu-text">{{ __('main.factories') }}</span>
+                                        </span>
+                                    </li>
+                                    @if (auth()->user()->hasPermissionTo('factories.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('factories.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.factories') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('branches.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('branches.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.branches') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+
+                    @if (auth()->user()->hasPermissionTo('cities.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-location"></i>
+                                </span>
+                                <span class="menu-text">{{ __('main.cities_and_regions') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                        <span class="menu-link">
+                                            <span class="menu-text">{{ __('main.cities_and_regions') }}</span>
+                                        </span>
+                                    </li>
+                                    @if (auth()->user()->hasPermissionTo('cities.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('citiesAndRegions.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.cities_and_regions') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+
+                    @if (auth()->user()->hasPermissionTo('containers.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-box"></i>
+                                </span>
+                                <span class="menu-text">{{ __('main.containers') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                        <span class="menu-link">
+                                            <span class="menu-text">{{ __('main.containers') }}</span>
+                                        </span>
+                                    </li>
+                                    @if (auth()->user()->hasPermissionTo('containers.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('containers.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.containers') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+
+                    @if (auth()->user()->hasPermissionTo('serviceCategories.index') ||
+                            auth()->user()->hasPermissionTo('services.index') ||
+                            auth()->user()->hasPermissionTo('financial_custody_agents.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-box"></i>
+                                </span>
+                                <span class="menu-text">{{ __('main.services') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    @if (auth()->user()->hasPermissionTo('serviceCategories.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('serviceCategories.index') }}"
+                                                id="serviceCategories-link" class="menu-link">
+                                                <span class="menu-text">{{ __('main.serviceCategories') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('services.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('services.index') }}" id="services-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.services') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('financial_custody_agents.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('financial_custody_agents.index') }}"
+                                                id="services-link" class="menu-link">
+                                                <span
+                                                    class="menu-text">{{ __('main.financial_custody_agents') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+
+                    @if (auth()->user()->hasPermissionTo('bookings.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </span>
+                                <span class="menu-text">{{ __('main.bookings') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                        <span class="menu-link">
+                                            <span class="menu-text">{{ __('main.bookings') }}</span>
+                                        </span>
+                                    </li>
+
+                                    @if (auth()->user()->hasPermissionTo('bookings.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('bookings.index') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.bookings') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+
+
+
+                    @if (auth()->user()->hasPermissionTo('daily_reports.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-box"></i>
+                                </span>
+                                <span class="menu-text">{{ __('main.reports') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                        <span class="menu-link">
+                                            <span class="menu-text">{{ __('main.reports') }}</span>
+                                        </span>
+                                    </li>
+                                    @if (auth()->user()->hasPermissionTo('daily_reports.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('reports.daily_reports') }}" class="menu-link">
+                                                <span class="menu-text">{{ __('main.daily_reports') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+
+
+
+                    @if (auth()->user()->hasPermissionTo('yards.index') ||
+                            auth()->user()->hasPermissionTo('shippingAgents.index') ||
+                            auth()->user()->hasPermissionTo('staticPages.index') ||
+                            auth()->user()->hasPermissionTo('ourServices.index') ||
+                            auth()->user()->hasPermissionTo('chooseUs.index') ||
+                            auth()->user()->hasPermissionTo('sponsers.index') ||
+                            auth()->user()->hasPermissionTo('reviews.index') ||
+                            auth()->user()->hasPermissionTo('settings.index') ||
+                            auth()->user()->hasPermissionTo('contactUs.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-cog"></i>
+                                </span>
+                                <span class="menu-text">{{ __('main.website_setting') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                        <span class="menu-link">
+                                            <span class="menu-text">{{ __('main.website_setting') }}</span>
+                                        </span>
+                                    </li>
+                                    @if (auth()->user()->hasPermissionTo('yards.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('yards.index') }}" id="yards-link" class="menu-link">
+                                                <span class="menu-text">{{ __('main.yards') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('shippingAgents.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('shippingAgents.index') }}" id="shippingAgents-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.shippingAgents') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('staticPages.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('staticPages.index') }}" id="static-pages-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.staticPages') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if (auth()->user()->hasPermissionTo('ourServices.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('ourServices.index') }}" id="our-services-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.ourServices') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('chooseUs.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('chooseUs.index') }}" id="choose-us-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.chooseUs') }}</span>
+                                            </a>
+                                        </li>
+                                    @endcan
+
+                                    @if (auth()->user()->hasPermissionTo('sponsers.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('sponsers.index') }}" id="sponsers-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.sponsers') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('reviews.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('reviews.index') }}" id="reviews-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.reviews') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('settings.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('settings.edit', 1) }}" id="settings-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.settings') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+
+                                    @if (auth()->user()->hasPermissionTo('contactUs.index'))
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('contactUs.index') }}" id="Contact-us-link"
+                                                class="menu-link">
+                                                <span class="menu-text">{{ __('main.contactUs') }}</span>
+                                            </a>
+                                        </li>
+                                    @endif
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+
+                @if (in_array('Admin', auth()->user()->roles->pluck('name')->toArray()))
+                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                        <a href="javascript:;" class="menu-link menu-toggle">
+                            <span class="svg-icon menu-icon">
+                                <i class="fas fa-users"></i>
+                            </span>
+                            <span class="menu-text">{{ __('main.manage_users') }}</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="menu-submenu">
+                            <i class="menu-arrow"></i>
+                            <ul class="menu-subnav">
+                                <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                    <span class="menu-link">
+                                        <span class="menu-text">{{ __('main.manage_users') }}</span>
+                                    </span>
+                                </li>
+
+
+
+                                @foreach (\Spatie\Permission\Models\Role::all() as $role)
+                                    <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                        data-menu-toggle="hover">
+                                        <a href="{{ route('users.index', ['role' => $role->name]) }}"
+                                            id="static-pages-link" class="menu-link">
+                                            <span class="menu-text">{{ $role->name }}</span>
+                                        </a>
+                                    </li>
+                                @endforeach
                                 <li class="menu-item menu-item-submenu" aria-haspopup="true"
                                     data-menu-toggle="hover">
-                                    <a href="{{ route('users.index', ['role' => $role->name]) }}"
-                                        id="static-pages-link" class="menu-link">
-                                        <span class="menu-text">{{ $role->name }}</span>
+                                    <a href="{{ route('users.index') }}" id="static-pages-link"
+                                        class="menu-link">
+                                        <span class="menu-text">{{ __("main.They_don't_have_roles") }}</span>
                                     </a>
                                 </li>
-                            @endforeach
-                            <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                data-menu-toggle="hover">
-                                <a href="{{ route('users.index') }}" id="static-pages-link" class="menu-link">
-                                    <span class="menu-text">{{ __("main.They_don't_have_roles") }}</span>
-                                </a>
-                            </li>
 
 
-                        </ul>
-                    </div>
-                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @endif
+                
                 @if (auth()->user()->hasPermissionTo('permissions.index'))
                     <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
 
