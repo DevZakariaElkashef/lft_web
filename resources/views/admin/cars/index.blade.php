@@ -35,6 +35,7 @@
                             <th scope="col">#</th>
                             <th scope="col">{{ __('admin.car_number') }}</th>
                             <th scope="col">{{ __('admin.created_at') }}</th>
+                            <th scope="col">{{ __('admin.export_shipments') }}</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -53,6 +54,12 @@
 
 
                                 <td>{{ $car->created_at }}</td>
+                                <td>
+                                    <a href="{{ route('shipments.export', $car->id) }}">
+                                        {{ __('admin.export_shipments') }}
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                </td>
                                 <td>
                                     <div class="row">
                                         <div class="col-md-3 mr-3">
