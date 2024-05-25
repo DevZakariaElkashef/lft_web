@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ShipmentExport;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ShipmentController extends Controller
 {
@@ -15,6 +17,14 @@ class ShipmentController extends Controller
         $shipments = $car->shipments;
 
         return view('admin.shipments.index', compact('car', 'shipments'));
+    }
+
+    public function export($id)
+    {
+        Car::findORFail($id);
+
+        return Excel::download(new ShipmentExport($id), 'shipments.xlsx');
+
     }
 
     public function create($id)

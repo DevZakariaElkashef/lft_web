@@ -54,6 +54,7 @@ Route::prefix('car_shipments')->group(function () {
     Route::post('/store', [ShipmentController::class, 'store'])->name('shipments.store');
     Route::put('/{id}/update', [ShipmentController::class, 'update'])->name('shipments.update');
     Route::delete('/{id}/destroy', [ShipmentController::class, 'destroy'])->name('shipments.destroy');
+    Route::get('/{id}/export', [ShipmentController::class, 'export'])->name('shipments.export');
 });
 // ----------------- CarShipments -----------------
 

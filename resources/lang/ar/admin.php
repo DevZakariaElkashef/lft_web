@@ -442,5 +442,6 @@ return [
     'permissions.delete' => 'حذف إذن',
     "role" => "الدور",
     "password" => 'كلمة المرور',
-    "addition" => 'الإضافات'
+    "addition" => 'الإضافات',
+    "export_shipments" => 'استخراج الشحنات'
 ];

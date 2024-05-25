@@ -38,6 +38,7 @@
                             <th scope="col">{{ __('admin.value') }}</th>
                             <th scope="col">{{ __('main.date') }}</th>
                             <th scope="col">{{ __('admin.addition') }}</th>
+                            <th scope="col">{{ __('admin.export_shipments') }}</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -48,7 +49,6 @@
                                 <td>
                                         {{ $shipment->car->car_number }}
                                 </td>
-                                <th scope="row">{{ $shipment->id }}</th>
                                 <td>
                                         {{ $shipment->name }}
                                 </td>
@@ -60,6 +60,12 @@
                                 </td>
                                 <td>
                                         {{ $shipment->addition }}
+                                </td>
+                                <td>
+                                        <a href="{{ route("shipments.export", $shipment->car_id) }}">
+                                            {{ __('admin.export_shipments') }}
+                                            <i class="fas fa-download"></i>
+                                        </a>
                                 </td>
                                 <td>
                                     <div class="row">

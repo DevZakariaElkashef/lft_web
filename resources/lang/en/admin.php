@@ -410,4 +410,5 @@ return [
     "role" => 'Role',
     "password" => 'Password',
     "addition" => 'Addition',
+    "export_shipments" => 'Export Shipments',
 ];
