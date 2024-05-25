@@ -26,105 +26,108 @@
             </div>
         </div>
         <div class="card-body">
-            <table class="table table-responsive-xl" id="table">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">{{ __('admin.name') }}</th>
-                        <th scope="col">{{ __('admin.email') }}</th>
-                        <th scope="col">{{ __('admin.address') }}</th>
-                        <th scope="col">{{ __('admin.phone') }}</th>
-                        <th scope="col">{{ __('admin.tax_no') }}</th>
-                        <th scope="col">{{ __('admin.taxed_status') }}</th>
-                        <th scope="col">{{ __('admin.bill_type') }}</th>
-                        <th scope="col">{{ __('admin.attachments') }}</th>
-                        <th scope="col">{{ __('admin.created_at') }}</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($companies as $company)
-                    <tr>
-                            <th scope="row">{{$company->id}}</th>
-                            <td>
-                                {{$company->name}}
-                            </td>
-                            <td>
-                                {{$company->email}}
-                            </td>
-                            <td>
-                                {{$company->address}}
-                            </td>
-                            <td>
-                                {{$company->phone}}
-                            </td>
-                            <td>
-                                {{$company->tax_no}}
-                            </td>
-                            <td>
-                                <span class="badge badge-{{ $company->taxed == 0 ? 'danger' : 'success' }} text-white">
-                                    <i class="fa fa-{{ $company->taxed == 0 ? 'xmark' : 'check' }} text-white"></i>
-                                    {{ $company->taxed_invoice }}
-                                </span>
-                            </td>
-                            <td>
-                                {{$company->bill_type == 1 ? __('admin.bill_type_invoice') : __('admin.bill_type_statement')}}
-                            </td>
-                            <td>
+            <div class="table-responsive">
 
-                                @if(!is_null($company->attachments))
-                                    @if(is_array($company->attachments))
-                                        @foreach($company->attachments as $attachment)
-                                            <a href="{{ url($attachment) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
-                                                <i class="fas fa-file-{{ pathinfo($attachment, PATHINFO_EXTENSION) == 'pdf' ? 'pdf text-danger' : 'image text-primary' }} "></i>
-                                            </a>
-                                        @endforeach
-                                    @else
-                                        <a href="{{ url($company->attachments) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
-                                            <i class="fas fa-file-pdf text-danger"></i>
-                                        </a>
-                                    @endif
-                                @endif
-                            </td>
-                            <td>{{ $company->created_at }}</td>
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-3 mr-3">
-                                        @can('companies.edit')
-                                        <a href="{{route('companies.edit',$company->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
-                                            <i class="fas fa-edit text-primary"></i>
-                                        </a>
-                                        @endcan
-                                    </div>
-                                    <div class="col-md-3">
-                                        @can('companies.destroy')
-                                            <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete" onclick="Delete('{{ $company->id }}')">
-                                                <i class="fas fa-trash text-danger"></i>
-                                            </button>
-                                        @endcan
-                                    </div>
-                                    <div class="col-md-12 mt-2">
-                                        @can('transportations.create')
-                                            <a href="{{route('companyTransportations.index', ['company_id' => $company->id])}}" class="btn btn-primary btn-hover-light">
-                                                <i class="fas fa-plus text-white"></i>
-                                                {{ __('admin.add_quotation_price') }}
-                                            </a>
-                                        @endcan
-                                    </div>
-                                    <div class="col-md-12 mt-2">
-                                        @can('services.create')
-                                            <a href="{{route('companyServices.index', ['company' => $company])}}" class="btn btn-primary btn-hover-light">
-                                                <i class="fas fa-plus text-white"></i>
-                                                {{ __('admin.services') }}
-                                            </a>
-                                        @endcan
-                                    </div>
-                                </div>
-                            </td>
+                <table class="table" id="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">{{ __('admin.name') }}</th>
+                            <th scope="col">{{ __('admin.email') }}</th>
+                            <th scope="col">{{ __('admin.address') }}</th>
+                            <th scope="col">{{ __('admin.phone') }}</th>
+                            <th scope="col">{{ __('admin.tax_no') }}</th>
+                            <th scope="col">{{ __('admin.taxed_status') }}</th>
+                            <th scope="col">{{ __('admin.bill_type') }}</th>
+                            <th scope="col">{{ __('admin.attachments') }}</th>
+                            <th scope="col">{{ __('admin.created_at') }}</th>
+                            <th scope="col"></th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($companies as $company)
+                        <tr>
+                                <th scope="row">{{$company->id}}</th>
+                                <td>
+                                    {{$company->name}}
+                                </td>
+                                <td>
+                                    {{$company->email}}
+                                </td>
+                                <td>
+                                    {{$company->address}}
+                                </td>
+                                <td>
+                                    {{$company->phone}}
+                                </td>
+                                <td>
+                                    {{$company->tax_no}}
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ $company->taxed == 0 ? 'danger' : 'success' }} text-white">
+                                        <i class="fa fa-{{ $company->taxed == 0 ? 'xmark' : 'check' }} text-white"></i>
+                                        {{ $company->taxed_invoice }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {{$company->bill_type == 1 ? __('admin.bill_type_invoice') : __('admin.bill_type_statement')}}
+                                </td>
+                                <td>
+    
+                                    @if(!is_null($company->attachments))
+                                        @if(is_array($company->attachments))
+                                            @foreach($company->attachments as $attachment)
+                                                <a href="{{ url($attachment) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
+                                                    <i class="fas fa-file-{{ pathinfo($attachment, PATHINFO_EXTENSION) == 'pdf' ? 'pdf text-danger' : 'image text-primary' }} "></i>
+                                                </a>
+                                            @endforeach
+                                        @else
+                                            <a href="{{ url($company->attachments) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
+                                                <i class="fas fa-file-pdf text-danger"></i>
+                                            </a>
+                                        @endif
+                                    @endif
+                                </td>
+                                <td>{{ $company->created_at }}</td>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-md-3 mr-3">
+                                            @can('companies.edit')
+                                            <a href="{{route('companies.edit',$company->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
+                                                <i class="fas fa-edit text-primary"></i>
+                                            </a>
+                                            @endcan
+                                        </div>
+                                        <div class="col-md-3">
+                                            @can('companies.destroy')
+                                                <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete" onclick="Delete('{{ $company->id }}')">
+                                                    <i class="fas fa-trash text-danger"></i>
+                                                </button>
+                                            @endcan
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            @can('transportations.create')
+                                                <a href="{{route('companyTransportations.index', ['company_id' => $company->id])}}" class="btn btn-primary btn-hover-light">
+                                                    <i class="fas fa-plus text-white"></i>
+                                                    {{ __('admin.add_quotation_price') }}
+                                                </a>
+                                            @endcan
+                                        </div>
+                                        <div class="col-md-12 mt-2">
+                                            @can('services.create')
+                                                <a href="{{route('companyServices.index', ['company' => $company])}}" class="btn btn-primary btn-hover-light">
+                                                    <i class="fas fa-plus text-white"></i>
+                                                    {{ __('admin.services') }}
+                                                </a>
+                                            @endcan
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <!--end::Card-->
