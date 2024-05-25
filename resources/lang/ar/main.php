@@ -73,7 +73,8 @@ return [
     "back" => "عودة",
     "manage_users" => "إدارة المستخدمين",
     "They_don't_have_roles" => "ليس لديهم أدوار",
-    "car_shipments" => 'شحونات السياره'
+    "car_shipments" => 'شحونات السياره',
+    "added_by" => 'تم الإضافه بواسطة'
 
 
 

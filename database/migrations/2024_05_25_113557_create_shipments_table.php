@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->string('addition')->default(0);
             $table->foreignId('car_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->timestamps();
         });
     }

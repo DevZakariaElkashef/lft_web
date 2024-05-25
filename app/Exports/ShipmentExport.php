@@ -9,11 +9,11 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ShipmentExport implements FromCollection, ShouldAutoSize, WithHeadings
 {
-    public $carId;
+    public $ids;
 
-    public function __construct($carId)
+    public function __construct($ids)
     {
-        $this->carId = $carId;
+        $this->ids = $ids;
 
     }
     /**
@@ -21,13 +21,14 @@ class ShipmentExport implements FromCollection, ShouldAutoSize, WithHeadings
     */
     public function collection()
     {
-        return Shipment::where('car_id', $this->carId)->get()->map(function ($sihpment){
+        return Shipment::whereIn('id', $this->ids)->get()->map(function ($sihpment){
             return [
                 'id' => $sihpment->id,
                 'car_number' => $sihpment->car->car_number,
                 'name' => $sihpment->name,
                 'value' => $sihpment->value,
                 'date' => $sihpment->date,
+                'user' => $sihpment->user ? $sihpment->user->name : "",
                 'addition' => $sihpment->addition
             ];
         });
@@ -41,6 +42,7 @@ class ShipmentExport implements FromCollection, ShouldAutoSize, WithHeadings
             __('admin.name'),
             __('admin.value'),
             __('main.date'),
+            __('main.added_by'),
             __('admin.addition')
         ];
     }

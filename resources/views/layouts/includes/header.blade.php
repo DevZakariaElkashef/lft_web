@@ -66,6 +66,7 @@ License: You must have a valid license purchased only from themeforest(the above
             color: red;
         }
     </style>
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->

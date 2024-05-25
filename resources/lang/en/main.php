@@ -48,6 +48,7 @@ return [
     "manage_users" => "Manage Users",
     "They_don't_have_roles" => "They don't have roles",
     "car_shipments" => "Car Shipments",
+    'added_by' => "Added By",
     // ------------------ Main ------------------
 
 ];

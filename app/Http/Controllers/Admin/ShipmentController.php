@@ -11,31 +11,40 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ShipmentController extends Controller
 {
-    public function index($id)
+    public function index(Request $request, $id)
     {
         $car = Car::findOrfail($id);
-        $shipments = $car->shipments;
+        $shipments = Shipment::query();
+
+        if ($request->filled('date_from')) {
+            $shipments->whereDate('date', '>', $request->date_from);
+        }
+
+        if ($request->filled('date_to')) {
+            $shipments->whereDate('date', '<', $request->date_to);
+        }
+
+        $shipments = $shipments->where('car_id', $id)->get();
 
         return view('admin.shipments.index', compact('car', 'shipments'));
     }
 
-    public function export($id)
+    public function export(Request $request, $id)
     {
-        Car::findORFail($id);
 
-        return Excel::download(new ShipmentExport($id), 'shipments.xlsx');
-
+        $ids = explode(',', $request->ids);
+        return Excel::download(new ShipmentExport($ids), 'shipments.xlsx');
     }
 
     public function create($id)
     {
         $car = Car::findOrfail($id);
-        
+
 
         return view('admin.shipments.create', compact('car'));
     }
-   
-   
+
+
     public function edit($id)
     {
         $shipment = Shipment::findOrfail($id);
@@ -53,6 +62,7 @@ class ShipmentController extends Controller
             'date' => 'required|date',
             'additions' => 'nullable|numeric'
         ]);
+        $data['user_id'] = auth()->user()->id;
 
         Shipment::create($data);
 
@@ -68,6 +78,7 @@ class ShipmentController extends Controller
             'date' => 'required|date',
             'additions' => 'nullable|numeric'
         ]);
+        $data['user_id'] = auth()->user()->id;
 
         $shipment->update($data);
 

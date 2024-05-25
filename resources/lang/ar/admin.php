@@ -443,5 +443,8 @@ return [
     "role" => "الدور",
     "password" => 'كلمة المرور',
     "addition" => 'الإضافات',
-    "export_shipments" => 'استخراج الشحنات'
+    "export_shipments" => 'استخراج الشحنات',
+    "filter" => "فلتر",
+    "from" => 'من',
+    'to' => "الى"
 ];
