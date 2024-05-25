@@ -6,6 +6,7 @@
                 {{ __('admin.add_new_booking') }}
             </div>
         </div>
+        
         @include('admin.bookings.form')
 
 

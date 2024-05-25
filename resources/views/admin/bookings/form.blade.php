@@ -21,12 +21,12 @@
                 ]) !!}
             @endif
 
-            <!--begin::Select-->
+            {{-- <!--begin::Select-->
             <div class="form-group{{ $errors->has('company_id') ? ' has-error' : '' }}">
                 {!! Form::label('company_id', __('main.company')) !!}
                 {!! Form::select(
                     'company_id',
-                    array_replace(['to_be_disabled' => __('admin.select')], $companies->all()),
+                    array_replace(['to_be_disabled' => __('admin.select')], $companies),
                     old('company_id'),
                     [
                         'id' => 'company_id',
@@ -36,7 +36,19 @@
                 ) !!}
                 <small class="text-danger">{{ $errors->first('company_id') }}</small>
             </div>
-            <!--end::Select-->
+            <!--end::Select--> --}}
+
+            <div class="form-group">
+                <label for="">{{ __('main.company') }}</label>
+                <select name="company_id" id="" class="form-control selectpicker">
+                    <option value="">{{ __('admin.select') }}</option>
+                    @foreach ($companies as $company)
+                        <option {{ old('company') == $company->id ? 'selected' : '' }}
+                            value="{{ $company->id }}">{{ $company->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
 
             <!--begin::Select-->
             <div class="form-group{{ $errors->has('employee_id') ? ' has-error' : '' }}">

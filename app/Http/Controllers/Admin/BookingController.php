@@ -74,6 +74,7 @@ class BookingController extends Controller
             [
                 'method'            => 'POST',
                 'action'            => route('bookings.store'),
+                'companies' => Company::all()
             ]
         );
 
@@ -88,6 +89,7 @@ class BookingController extends Controller
      */
     public function store(BookingRequest $request)
     {
+        // dd($request->all());
         DB::beginTransaction();
         try {
             $booking = Booking::create($request->only(
@@ -114,17 +116,17 @@ class BookingController extends Controller
                 }
             }
             BookingContainer::insert($dataBookingContainers);
-            // for ($i = 0; $i < count($request->branches); $i++) {
-            //     $dataBookingContainers = [
-            //         'booking_id'        => $booking->id,
-            //         'container_id'      => $request->containers[$i],
-            //         'arrival_date'      => $request->arrival_dates[$i],
-            //         'container_no'      => $request->container_no[$i],
-            //         'sail_of_number'    => $request->sail_of_numbers[$i],
-            //         'branch_id' => $request->branches[$i]
-            //     ];
-            //     BookingContainer::create($dataBookingContainers);
-            // }
+            for ($i = 0; $i < count($request->branches); $i++) {
+                $dataBookingContainers = [
+                    'booking_id'        => $booking->id,
+                    'container_id'      => $request->containers[$i],
+                    'arrival_date'      => $request->arrival_dates[$i],
+                    'container_no'      => $request->container_no[$i],
+                    'sail_of_number'    => $request->sail_of_numbers[$i],
+                    'branch_id' => $request->branches[$i]
+                ];
+                BookingContainer::create($dataBookingContainers);
+            }
 
             DB::commit();
             if ($booking)

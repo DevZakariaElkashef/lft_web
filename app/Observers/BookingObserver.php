@@ -11,7 +11,7 @@ class BookingObserver
 
     public function created(Booking $booking)
     {
-        Notification::send($booking->company, new NewBooking($booking));
+        // Notification::send($booking->company, new NewBooking($booking));
 
     }
 
