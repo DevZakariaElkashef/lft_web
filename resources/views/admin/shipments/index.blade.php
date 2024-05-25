@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        @include('layouts.includes.breadcrumb', ['page' => __('main.cars')])
+        @include('layouts.includes.breadcrumb', ['page' => __('main.car_shipments')])
         <!--begin::Card-->
         <div class="card card-custom">
             <div class="card-header flex-wrap py-5">
                 <div class="card-toolbar">
                     <!--begin::Button-->
                     @can('cars.create')
-                        <a href="{{ route('cars.create') }}" class="btn btn-primary font-weight-bolder">
+                        <a href="{{ route('shipments.create', request()->id) }}" class="btn btn-primary font-weight-bolder">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -34,30 +34,38 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">{{ __('admin.car_number') }}</th>
-                            <th scope="col">{{ __('admin.created_at') }}</th>
+                            <th scope="col">{{ __('admin.name') }}</th>
+                            <th scope="col">{{ __('admin.value') }}</th>
+                            <th scope="col">{{ __('main.date') }}</th>
+                            <th scope="col">{{ __('admin.addition') }}</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cars as $car)
+                        @foreach ($shipments as $shipment)
                             <tr>
-                                <th scope="row">{{ $car->id }}</th>
+                                <th scope="row">{{ $shipment->id }}</th>
                                 <td>
-                                    <a href="{{ route('shipments.index', $car->id) }}">
-                                        {{ $car->car_number }}
-                                    </a>
+                                        {{ $shipment->car->car_number }}
                                 </td>
-
-
-
-
-
-                                <td>{{ $car->created_at }}</td>
+                                <th scope="row">{{ $shipment->id }}</th>
+                                <td>
+                                        {{ $shipment->name }}
+                                </td>
+                                <td>
+                                        {{ $shipment->value }}
+                                </td>
+                                <td>
+                                        {{ $shipment->date }}
+                                </td>
+                                <td>
+                                        {{ $shipment->addition }}
+                                </td>
                                 <td>
                                     <div class="row">
                                         <div class="col-md-3 mr-3">
                                             {{-- @can('cars.edit') --}}
-                                            <a href="{{ route('cars.edit', $car->id) }}"
+                                            <a href="{{ route('shipments.edit', $shipment->id) }}"
                                                 class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
                                                 <i class="fas fa-edit text-primary"></i>
                                             </a>
@@ -66,7 +74,7 @@
                                         <div class="col-md-3">
                                             {{-- @can('cars.destroy') --}}
                                             <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
-                                                onclick="Delete('{{ $car->id }}')">
+                                                onclick="Delete('{{ $shipment->id }}')">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </button>
                                             {{-- @endcan --}}
@@ -95,7 +103,7 @@
                 cancelButtonText: "{{ __('alerts.cancel') }}",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var url = '{{ route('cars.destroy', ':id') }}';
+                    var url = '{{ route('shipments.destroy', ':id') }}';
                     url = url.replace(':id', id);
                     var token = '{{ csrf_token() }}';
                     $.ajaxSetup({

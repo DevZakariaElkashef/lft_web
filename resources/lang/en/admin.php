@@ -409,4 +409,5 @@ return [
     'permissions.delete' => 'Delete Permission',
     "role" => 'Role',
     "password" => 'Password',
+    "addition" => 'Addition',
 ];

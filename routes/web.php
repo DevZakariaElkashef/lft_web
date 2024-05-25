@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\MoneyTransferController;
 use App\Http\Controllers\Admin\CompanyServicesController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\CompanyTransportationController;
+use App\Http\Controllers\Admin\ShipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,21 @@ Route::get('/index', function () {
 
 Auth::routes();
 
+
+// ----------------- CarShipments -----------------
+Route::prefix('car_shipments')->group(function () {
+    Route::get('/{id}/car', [ShipmentController::class, 'index'])->name('shipments.index');
+    Route::get('/{id}/create', [ShipmentController::class, 'create'])->name('shipments.create');
+    Route::get('/{id}/edit', [ShipmentController::class, 'edit'])->name('shipments.edit');
+    Route::post('/store', [ShipmentController::class, 'store'])->name('shipments.store');
+    Route::put('/{id}/update', [ShipmentController::class, 'update'])->name('shipments.update');
+    Route::delete('/{id}/destroy', [ShipmentController::class, 'destroy'])->name('shipments.destroy');
+});
+// ----------------- CarShipments -----------------
+
+
+
+
 // ----------------- Dashboard -----------------
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
 
@@ -59,8 +75,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     // ----------------- Permissions -----------------
     Route::resource('permissions', PermissionController::class);
     // ----------------- Permissions -----------------
-    
-    
+
+
     // ----------------- manageUsers -----------------
     Route::resource('users', UserController::class);
     // ----------------- manageUsers -----------------
