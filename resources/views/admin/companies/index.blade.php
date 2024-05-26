@@ -53,7 +53,7 @@
                                 <tr>
                                     <th scope="row">{{ $company->id }}</th>
                                     <td>
-                                        <a href="{{ route('companyInvoices', $company->id) }}">{{ $company->name }}</a>
+<a href="{{ route('companyInvoice.index', $company->id) }}">{{ $company->name }}</a>
                                     </td>
                                     <td>
                                         {{ $company->email }}

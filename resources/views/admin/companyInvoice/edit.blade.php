@@ -8,8 +8,8 @@
             </div>
         </div>
         {!! Form::open([
-'url' => route('companyInvoice.store'),
-            'method' => 'post',
+            'url' => route('companyInvoice.update', [$invoice->company_id]),
+            'method' => 'put',
             'enctype' => 'multipart/form-data',
             'files' => true,
         ]) !!}
@@ -25,7 +25,6 @@
                             'class' => 'form-control',
                             'id' => 'input_image',
                             'placeholder' => 'صورة التحويل',
-                            'required' => true,
                         ]) !!}
                         @error('image')
                             <small class="aleart text-danger">{{ $message }}</small>
@@ -35,7 +34,7 @@
                 <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                         {!! Form::label('input_total', 'القيمة المرسلة') !!}
-                        {!! Form::text('total', old('total'), [
+                        {!! Form::text('total', $invoice->total ?? old('total'), [
                             'class' => 'form-control',
                             'id' => 'input_total',
                             'placeholder' => 'القيمة المرسلة',
@@ -48,7 +47,7 @@
                 </div>
 
                 <!-- Add hidden input field here -->
-                {!! Form::hidden('company_id', $id) !!}
+                {!! Form::hidden('invoice_id', $invoice->id) !!}
                 <!-- You can also add multiple hidden fields as needed -->
 
             </div>

@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\companyInvoicesExport;
-use JWTAuth;
 use App\Models\Company;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CompanyRequest;
 use App\Http\Traits\ImagesTrait;
-use App\Models\companyInvoices;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\AssignPasswordNotification;
-use Maatwebsite\Excel\Facades\Excel;
 
 class CompanyController extends Controller
 {
@@ -29,48 +24,7 @@ class CompanyController extends Controller
         ];
         return view('admin.companies.index', $input);
     }
-    public function companyInvoices($id)
-    {
-        $company = Company::findOrFail($id);
-        $invoices = companyInvoices::where('company_id', $company->id)->latest()->get();
-        return view('admin.companies.companyInvoices', compact('company', 'invoices'));
-    }
-    public function createcompanyInvoices($id)
-    {
-        return view('admin.companies.createcompanyInvoices', compact('id'));
-    }
-    public function storecompanyInvoices(Request $request)
-    {
 
-        $request->validate([
-            'image' => 'required|file|mimes:png,jpg,jpeg,gif,pdf',
-            'total' => 'required|numeric',
-            'company_id' => 'required|exists:companies,id'
-        ]);
-        $imageName = time() . '_invoice.' . $request->image->extension();
-        $this->uploadImage($request->image, $imageName, 'companyInvoice');
-        companyInvoices::create([
-            'image' => $imageName,
-            'total' => $request->total,
-            'user_id' => auth()->user()->id,
-            'company_id' => $request->company_id
-        ]);
-        return redirect()->route('companyInvoices', $request->company_id)
-            ->with('success', __('alerts.added_successfully'));
-    }
-    public function filtercompanyInvoices(Request $request)
-    {
-        $invoices = companyInvoices::where(function ($query) use ($request) {
-            $query->where('company_id', $request->company_id)->whereBetween('created_at', [$request->from, $request->to]);
-        })->latest()->get();
-        $company = Company::findOrFail($request->company_id);
-        return view('admin.companies.companyInvoices', compact('company', 'invoices'));
-    }
-    public function companyInvoicesExport($from, $to, $company_id)
-    {
-        $company = Company::findOrFail($company_id);
-        return Excel::download(new companyInvoicesExport($from, $to, $company_id), $company->name . '.xlsx');
-    }
 
     /**
      * Show the form for creating a new resource.

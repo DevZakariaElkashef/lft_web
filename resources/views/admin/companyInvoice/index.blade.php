@@ -2,7 +2,6 @@
 @php
     $from = isset($_GET['from']) ? $_GET['from'] : '';
     $to = isset($_GET['to']) ? $_GET['to'] : '';
-    $company_id = isset($_GET['company_id']) ? $_GET['company_id'] : '';
 @endphp
 
 @section('content')
@@ -12,7 +11,7 @@
         <div class="card card-custom">
             <div class="card-header flex-wrap py-5">
                 <div class="card-toolbar">
-                    <a href="{{ route('createcompanyInvoices', $company->id) }}" class="btn btn-primary font-weight-bolder">
+                    <a href="{{ route('companyInvoice.create', $company->id) }}" class="btn btn-primary font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -40,7 +39,7 @@
                 فلتر
             </button>
             @if ($from)
-                <a href="{{ route('companyInvoicesExport', [$from, $to, $company_id]) }}" class="btn btn-secondary">
+                <a href="{{ route('companyInvoice.export', [$from, $to, $company->id]) }}" class="btn btn-secondary">
                     تحميل الملف
                 </a>
             @endif
@@ -55,8 +54,7 @@
                                 X
                             </button>
                         </div>
-                        <form action="{{ route('filtercompanyInvoices') }}" method="get">
-                            <input type="hidden" name="company_id" value="{{ $company->id }}" />
+                        <form action="{{ route('companyInvoice.index', $company->id) }}" method="get">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -148,44 +146,48 @@
     </div>
     <!--end::Card-->
     </div>
-    <div class="modal fade" id="exampleModalDefault" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        فلتر ب فترة زمنية
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="card-body">
-
-                        <form id="submit-form1" class="was-validated" action="{{ route('filtercompanyInvoices') }}"
-                            method="get">
-                            <input type="hidden" name="company_id" value="{{ $company->id }}">
-                            <div class="form-group">
-                                <label for="validationTextarea" class="form-label">
-                                    من
-                                </label>
-                                <input class="form-control is-invalid" id="validationTextarea" placeholder="من"
-                                    name="from" type="date" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="validationTextarea" class="form-label">الي</label>
-                                <input class="form-control is-invalid" id="validationTextarea" placeholder="من"
-                                    name="to" type="date" required>
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">{{ __('dashboard.close') }}</button>
-                    <button form="submit-form1" type="submit" class="btn btn-primary">فلتر</button>
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
+@push('js')
+    <script>
+        function Delete(id) {
+            Swal.fire({
+                title: "{{ __('alerts.are_you_sure') }}",
+                text: "{{ __('alerts.not_revert_information') }}",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: "{{ __('alerts.confirm') }}",
+                cancelButtonText: "{{ __('alerts.cancel') }}",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = '{{ route('companyInvoice.destroy', ':id') }}';
+                    url = url.replace(':id', id);
+                    var token = '{{ csrf_token() }}';
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': token,
+                            'X-Requested-With': 'XMLHttpRequest',
+                        }
+                    });
+                    $.ajax({
+                        url: url,
+                        type: 'delete',
+                        success: function(response, textStatus, xhr) {
+                            console.log(response, xhr.status);
+                            if (xhr.status == 200) {
+                                Swal.fire({
+                                    title: "{{ __('alerts.done') }}",
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                });
+                                location.reload();
+                                //getNotify();
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+@endpush
