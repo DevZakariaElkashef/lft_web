@@ -34,6 +34,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">{{ __('admin.car_number') }}</th>
+                            <th scope="col">{{ __('admin.wallet') }}</th>
                             <th scope="col">{{ __('admin.created_at') }}</th>
                             <th scope="col"></th>
                         </tr>
@@ -53,10 +54,7 @@
 
                                 </td>
 
-
-
-
-
+                                <td>{{ $car->wallet }}</td>
                                 <td>{{ $car->created_at }}</td>
 
                                 <td>

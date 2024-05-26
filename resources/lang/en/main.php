@@ -49,6 +49,7 @@ return [
     "They_don't_have_roles" => "They don't have roles",
     "car_shipments" => "Car Shipments",
     'added_by' => "Added By",
+    "car_wallet_does_not_have_enough_amount" => 'Car Wallet does not have enough amount'
     // ------------------ Main ------------------
 
 ];

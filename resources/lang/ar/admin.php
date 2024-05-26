@@ -446,5 +446,6 @@ return [
     "export_shipments" => 'استخراج الشحنات',
     "filter" => "فلتر",
     "from" => 'من',
-    'to' => "الى"
+    'to' => "الى",
+    "wallet" => 'محفظة'
 ];

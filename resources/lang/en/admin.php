@@ -413,5 +413,6 @@ return [
     "export_shipments" => 'Export Shipments',
     "filter" => 'Filter',
     'from' => 'From', 
-    'to' => 'To'
+    'to' => 'To',
+    "wallet" => 'Wallet'
 ];

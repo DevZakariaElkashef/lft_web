@@ -27,6 +27,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'car_number'     =>  'required|unique:cars,car_number,'. $this->car->id,
+            'wallet' => 'nullable|numeric'
         ];
     }
 

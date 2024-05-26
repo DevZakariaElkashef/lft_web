@@ -27,6 +27,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'car_number'     =>  'required|unique:cars,car_number',
+            'wallet' => 'nullable|numeric'
         ];
     }
 

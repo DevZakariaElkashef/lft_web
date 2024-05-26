@@ -72,9 +72,19 @@ class ShipmentController extends Controller
         ]);
         $data['user_id'] = auth()->user()->id;
 
-        Shipment::create($data);
+        $car = Car::findOrFail($request->car_id);
+        $value = $request->value + $request->addition;
+        if ($car->wallet >= $value) {
+            $car->update([
+                'wallet' => $car->wallet - $value
+            ]);
 
-        return to_route('shipments.index', $request->car_id)->with('success', __('alerts.added_successfully'));
+            Shipment::create($data);
+
+            return to_route('shipments.index', $request->car_id)->with('success', __('alerts.added_successfully'));
+        }
+
+        return to_route('shipments.index', $request->car_id)->with('error', __('main.car_wallet_does_not_have_enough_amount'));
     }
 
     public function update(Request $request, $id)
@@ -88,8 +98,31 @@ class ShipmentController extends Controller
         ]);
         $data['user_id'] = auth()->user()->id;
 
-        $shipment->update($data);
 
+        $oldValue = $shipment->value + $shipment->addition;
+        $newValue = $request->value + $request->addition;
+        $car = $shipment->car;
+
+        if ($newValue > $oldValue) {
+            $diff = $newValue - $oldValue;
+
+            if ($car->wallet - $diff < 0) {
+                return to_route('shipments.index', $car->id)->with('error', __('main.car_wallet_does_not_have_enough_amount'));
+            }
+
+            $car->update([
+                'wallet' => $car->wallet - $diff
+            ]);
+        }
+
+        if ($oldValue > $newValue) {
+            $diff = $oldValue - $newValue;
+            $car->update([
+                'wallet' => $car->wallet + $diff
+            ]);
+        }
+
+        $shipment->update($data);
         return to_route('shipments.index', $shipment->car_id)->with('success', __('alerts.updated_successfully'));
     }
 
