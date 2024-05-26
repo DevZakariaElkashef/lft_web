@@ -120,20 +120,16 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-3 mr-3">
-                                        {{-- @can('cars.edit') --}}
                                         <a href="{{ route('companyInvoice.edit', $invoice->id) }}"
                                             class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
                                             <i class="fas fa-edit text-primary"></i>
                                         </a>
-                                        {{-- @endcan --}}
                                     </div>
                                     <div class="col-md-3">
-                                        {{-- @can('cars.destroy') --}}
                                         <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
                                             onclick="Delete('{{ $invoice->id }}')">
                                             <i class="fas fa-trash text-danger"></i>
                                         </button>
-                                        {{-- @endcan --}}
                                     </div>
 
                                 </div>

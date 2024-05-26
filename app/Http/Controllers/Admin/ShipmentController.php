@@ -11,6 +11,14 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ShipmentController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:shipments.index')->only('index');
+        $this->middleware('permission:shipments.create')->only(['create', 'store']);
+        $this->middleware('permission:shipments.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:shipments.delete')->only('destroy');
+    }
     public function index(Request $request, $id)
     {
         $car = Car::findOrfail($id);

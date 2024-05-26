@@ -22,7 +22,15 @@ use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
-    /**
+
+    public function __construct()
+    {
+        $this->middleware('permission:bookings.index')->only('index');
+        $this->middleware('permission:bookings.create')->only(['create', 'store']);
+        $this->middleware('permission:bookings.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:bookings.delete')->only('destroy');
+    }
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -89,7 +97,6 @@ class BookingController extends Controller
      */
     public function store(BookingRequest $request)
     {
-        // dd($request->all());
         DB::beginTransaction();
         try {
             $booking = Booking::create($request->only(
@@ -104,7 +111,9 @@ class BookingController extends Controller
                 'employee_name',
                 'factory_id'
             ));
+            
             $dataBookingContainers = [];
+            
             foreach ($request->get('containers') as $container) {
                 for ($i = 0; $i < $container['containers_count']; $i++) {
                     $dataBookingContainers[] = [
@@ -116,17 +125,17 @@ class BookingController extends Controller
                 }
             }
             BookingContainer::insert($dataBookingContainers);
-            for ($i = 0; $i < count($request->branches); $i++) {
-                $dataBookingContainers = [
-                    'booking_id'        => $booking->id,
-                    'container_id'      => $request->containers[$i],
-                    'arrival_date'      => $request->arrival_dates[$i],
-                    'container_no'      => $request->container_no[$i],
-                    'sail_of_number'    => $request->sail_of_numbers[$i],
-                    'branch_id' => $request->branches[$i]
-                ];
-                BookingContainer::create($dataBookingContainers);
-            }
+            // for ($i = 0; $i < count($request->branches); $i++) {
+            //     $dataBookingContainers = [
+            //         'booking_id'        => $booking->id,
+            //         'container_id'      => $request->containers[$i],
+            //         'arrival_date'      => $request->arrival_dates[$i],
+            //         'container_no'      => $request->container_no[$i],
+            //         'sail_of_number'    => $request->sail_of_numbers[$i],
+            //         'branch_id' => $request->branches[$i]
+            //     ];
+            //     BookingContainer::create($dataBookingContainers);
+            // }
 
             DB::commit();
             if ($booking)

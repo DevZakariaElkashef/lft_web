@@ -12,6 +12,14 @@ use App\Notifications\AssignPasswordNotification;
 class CompanyController extends Controller
 {
     use ImagesTrait;
+
+    public function __construct()
+    {
+        $this->middleware('permission:companies.index')->only('index');
+        $this->middleware('permission:companies.create')->only(['create', 'store']);
+        $this->middleware('permission:companies.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:companies.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

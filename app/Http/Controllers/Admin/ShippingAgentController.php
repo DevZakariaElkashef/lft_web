@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ShippingAgentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:shippingAgents.index')->only('index');
+        $this->middleware('permission:shippingAgents.create')->only(['create', 'store']);
+        $this->middleware('permission:shippingAgents.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:shippingAgents.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

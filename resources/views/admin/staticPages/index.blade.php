@@ -7,8 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                {{--  @can('staticPages.create')
-                <a href="{{route('staticPages.create')}}" class="btn btn-primary font-weight-bolder">
+                {{-- <a href="{{route('staticPages.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -20,8 +19,7 @@
                         </svg>
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
-                </a>
-                @endcan  --}}
+                </a> --}}
                 <!--end::Button-->
             </div>
         </div>
@@ -50,16 +48,16 @@
                             </td>
                             <td>{{$staticPage->created_at}}</td>
                             <td>
-                                @can('staticPages.edit')
+                                @if(auth()->user()->hasPermissionTo('staticPages.update'))
                                 <a href="{{route('staticPages.edit',$staticPage->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                @endcan
-                                @can('staticPages.destroy')
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('staticPages.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $staticPage->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

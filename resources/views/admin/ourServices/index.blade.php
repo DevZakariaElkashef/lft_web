@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('ourService.create')
+                @if(auth()->user()->hasPermissionTo('ourServices.create'))
                 <a href="{{route('ourServices.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -50,16 +50,16 @@
                             </td>
                             <td>{{ $service->created_at }}</td>
                             <td>
-                                @can('ourService.edit')
+                                @if(auth()->user()->hasPermissionTo('ourServices.update'))
                                 <a href="{{ route('ourServices.edit',$service->id) }}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                @endcan
-                                @can('ourService.destroy')
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('ourServices.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $service->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

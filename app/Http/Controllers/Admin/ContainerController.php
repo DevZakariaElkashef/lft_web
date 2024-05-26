@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class ContainerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:containers.index')->only('index');
+        $this->middleware('permission:containers.create')->only(['create', 'store']);
+        $this->middleware('permission:containers.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:containers.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

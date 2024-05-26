@@ -7,12 +7,12 @@
             <div class="card-header flex-wrap py-5">
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    @can('cars.create')
+                    @if (auth()->user()->hasPermissionTo('cars.create'))
                         <a href="{{ route('cars.create') }}" class="btn btn-primary font-weight-bolder">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                         <rect x="0" y="0" width="24" height="24" />
                                         <circle fill="#000000" cx="9" cy="15" r="6" />
@@ -24,7 +24,7 @@
                                 <!--end::Svg Icon-->
                             </span>{{ __('admin.add') }}
                         </a>
-                    @endcan
+                    @endif
                     <!--end::Button-->
                 </div>
             </div>
@@ -43,9 +43,14 @@
                             <tr>
                                 <th scope="row">{{ $car->id }}</th>
                                 <td>
-                                    <a href="{{ route('shipments.index', $car->id) }}">
+                                    @if (auth()->user()->hasPermissionTo('cars.update'))
+                                        <a href="{{ route('shipments.index', $car->id) }}">
+                                            {{ $car->car_number }}
+                                        </a>
+                                    @else
                                         {{ $car->car_number }}
-                                    </a>
+                                    @endif
+
                                 </td>
 
 
@@ -53,24 +58,24 @@
 
 
                                 <td>{{ $car->created_at }}</td>
-                                
+
                                 <td>
                                     <div class="row">
                                         <div class="col-md-3 mr-3">
-                                            {{-- @can('cars.edit') --}}
-                                            <a href="{{ route('cars.edit', $car->id) }}"
-                                                class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
-                                                <i class="fas fa-edit text-primary"></i>
-                                            </a>
-                                            {{-- @endcan --}}
+                                            @if (auth()->user()->hasPermissionTo('cars.update'))
+                                                <a href="{{ route('cars.edit', $car->id) }}"
+                                                    class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
+                                                    <i class="fas fa-edit text-primary"></i>
+                                                </a>
+                                            @endif
                                         </div>
                                         <div class="col-md-3">
-                                            {{-- @can('cars.destroy') --}}
-                                            <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
-                                                onclick="Delete('{{ $car->id }}')">
-                                                <i class="fas fa-trash text-danger"></i>
-                                            </button>
-                                            {{-- @endcan --}}
+                                            @if (auth()->user()->hasPermissionTo('cars.delete'))
+                                                <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
+                                                    onclick="Delete('{{ $car->id }}')">
+                                                    <i class="fas fa-trash text-danger"></i>
+                                                </button>
+                                            @endif
                                         </div>
 
                                     </div>

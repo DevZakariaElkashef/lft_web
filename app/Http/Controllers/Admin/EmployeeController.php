@@ -9,6 +9,13 @@ use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:employees.index')->only('index');
+        $this->middleware('permission:employees.create')->only(['create', 'store']);
+        $this->middleware('permission:employees.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:employees.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -7,12 +7,12 @@
             <div class="card-header flex-wrap py-5">
                 <div class="card-toolbar">
                     <!--begin::Button-->
-                    @can('companies.create')
+                    @if (auth()->user()->hasPermissionTo('companies.create'))
                         <a href="{{ route('companies.create') }}" class="btn btn-primary font-weight-bolder">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
-                                    height="24px" viewBox="0 0 24 24" version="1.1">
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                         <rect x="0" y="0" width="24" height="24" />
                                         <circle fill="#000000" cx="9" cy="15" r="6" />
@@ -24,7 +24,7 @@
                                 <!--end::Svg Icon-->
                             </span>{{ __('admin.add') }}
                         </a>
-                    @endcan
+                    @endif
                     <!--end::Button-->
                 </div>
             </div>
@@ -53,7 +53,13 @@
                                 <tr>
                                     <th scope="row">{{ $company->id }}</th>
                                     <td>
-<a href="{{ route('companyInvoice.index', $company->id) }}">{{ $company->name }}</a>
+                                        @if (auth()->user()->hasPermissionTo('companies.update'))
+                                            <a href="{{ route('companyInvoice.index', $company->id) }}">
+                                                {{ $company->name }}
+                                            </a>
+                                        @else
+                                            {{ $company->name }}
+                                        @endif
                                     </td>
                                     <td>
                                         {{ $company->email }}
@@ -101,38 +107,39 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-md-3 mr-3">
-                                                @can('companies.edit')
+                                                @if (auth()->user()->hasPermissionTo('companies.update'))
                                                     <a href="{{ route('companies.edit', $company->id) }}"
                                                         class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
                                                         <i class="fas fa-edit text-primary"></i>
                                                     </a>
-                                                @endcan
+                                                @endif
                                             </div>
                                             <div class="col-md-3">
-                                                @can('companies.destroy')
-                                                    <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
+                                                @if (auth()->user()->hasPermissionTo('companies.delete'))
+                                                    <button
+                                                        class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
                                                         onclick="Delete('{{ $company->id }}')">
                                                         <i class="fas fa-trash text-danger"></i>
                                                     </button>
-                                                @endcan
+                                                @endif
                                             </div>
                                             <div class="col-md-12 mt-2">
-                                                @can('transportations.create')
+                                                @if (auth()->user()->hasPermissionTo('transportations.create'))
                                                     <a href="{{ route('companyTransportations.index', ['company_id' => $company->id]) }}"
                                                         class="btn btn-primary btn-hover-light">
                                                         <i class="fas fa-plus text-white"></i>
                                                         {{ __('admin.add_quotation_price') }}
                                                     </a>
-                                                @endcan
+                                                @endif
                                             </div>
                                             <div class="col-md-12 mt-2">
-                                                @can('services.create')
+                                                @if (auth()->user()->hasPermissionTo('services.create'))
                                                     <a href="{{ route('companyServices.index', ['company' => $company]) }}"
                                                         class="btn btn-primary btn-hover-light">
                                                         <i class="fas fa-plus text-white"></i>
                                                         {{ __('admin.services') }}
                                                     </a>
-                                                @endcan
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
@@ -146,7 +153,7 @@
         <!--end::Card-->
     </div>
 
-    @can('companies.read')
+    @if (auth()->user()->hasPermissionTo('companies.index'))
         <!-- Creates the bootstrap modal where the Note Of Transaction For users will appear -->
         <div class="modal fade" id="attachmentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
             aria-hidden="true">
@@ -161,7 +168,7 @@
                 </div>
             </div>
         </div>
-    @endcan
+    @endif
 @endsection
 @push('js')
     <script>

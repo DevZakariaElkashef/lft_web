@@ -23,11 +23,11 @@
                             <td>{{$contact->message}}</td>
                             <td>{{$contact->created_at}}</td>
                             <td>
-                                @can('contactUs.destroy')
+                                @if(auth()->user()->hasPermissionTo('contactUs.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $contact->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class YardController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:yards.index')->only('index');
+        $this->middleware('permission:yards.create')->only(['create', 'store']);
+        $this->middleware('permission:yards.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:yards.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +40,7 @@ class YardController extends Controller
         $input = [
             'method' => 'POST',
             'action' => route('yards.store')
-                ];
+        ];
 
         return view('admin.yards.create', $input);
     }
@@ -73,7 +80,7 @@ class YardController extends Controller
             'yard' => $yard,
             'method' => 'PUT',
             'action' => route('yards.update', $yard)
-                ];
+        ];
 
         return view('admin.yards.edit', $input);
     }

@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('drivers.create')
+                @if(auth()->user()->hasPermissionTo('drivers.create'))
                 <a href="{{route('drivers.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -55,18 +55,18 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-3 mr-3">
-                                        {{-- @can('drivers.edit') --}}
+                                        @if(auth()->user()->hasPermissionTo('drivers.update'))
                                         <a href="{{route('drivers.edit',$driver->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
                                             <i class="fas fa-edit text-primary"></i>
                                         </a>
-                                        {{-- @endcan --}}
+                                        @endif
                                     </div>
                                     <div class="col-md-3">
-                                        {{-- @can('drivers.destroy') --}}
+                                        @if(auth()->user()->hasPermissionTo('drivers.delete'))
                                             <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete" onclick="Delete('{{ $driver->id }}')">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </button>
-                                        {{-- @endcan --}}
+                                        @endif
                                     </div>
                                   
                                 </div>

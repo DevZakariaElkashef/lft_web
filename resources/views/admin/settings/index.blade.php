@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('settings.create')
+                @if(auth()->user()->hasPermissionTo('settings.create'))
                 <a href="{{route('settings.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -97,16 +97,16 @@
                             </td>
                             <td>{{$setting->created_at ?? ''}}</td>
                             <td>
-                                @can('settings.edit')
+                                @if(auth()->user()->hasPermissionTo('settings.update'))
                                 <a href="{{route('settings.edit',$setting->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                @endcan
-                                @can('settings.destroy')
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('settings.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $setting->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         @endif
                     </tr>

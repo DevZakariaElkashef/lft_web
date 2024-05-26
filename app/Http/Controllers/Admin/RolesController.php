@@ -14,9 +14,12 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
+    public function __construct()
     {
-
+        $this->middleware('permission:permissions.index')->only('index');
+        $this->middleware('permission:permissions.create')->only(['create', 'store']);
+        $this->middleware('permission:permissions.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:permissions.delete')->only('destroy');
     }
 
     /**

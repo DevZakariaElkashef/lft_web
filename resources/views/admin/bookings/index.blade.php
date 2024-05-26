@@ -36,7 +36,7 @@
             <div class="card-header flex-wrap py-5">
                 <div class="card-toolbar w-100 d-flex justify-content-between align-items-center">
                     <!--begin::Button-->
-                    @can('bookings.create')
+                    @if(auth()->user()->hasPermissionTo('bookings.create'))
                         <a href="{{ route('bookings.create') }}" class="btn btn-primary font-weight-bolder">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -53,7 +53,7 @@
                                 <!--end::Svg Icon-->
                             </span>{{ __('admin.add_new_booking') }}
                         </a>
-                    @endcan
+                    @endif
                     <!--end::Button-->
 
                     <div class="p-2">
@@ -208,30 +208,30 @@
                                 <td>{{ 'لم يتم طباعة الفاتورة الالكترونية' }}</td>
                                 <td>
                                     <div class="row">
-                                        @can('bookings.show')
+                                        @if(auth()->user()->hasPermissionTo('bookings.index'))
                                             <div class="col-md-3 col-sm-6 ml-2">
                                                 <a href="{{ route('bookings.show', $booking->id) }}"
                                                     class="btn btn-icon btn-light btn-hover-success btn-sm mx-3">
                                                     <i class="fas fa-eye text-success"></i>
                                                 </a>
                                             </div>
-                                        @endcan
-                                        @can('bookings.edit')
+                                        @endif
+                                        @if(auth()->user()->hasPermissionTo('bookings.update'))
                                             <div class="col-md-3 col-sm-6 ml-2">
                                                 <a href="{{ route('bookings.edit', $booking->id) }}"
                                                     class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                                     <i class="fas fa-edit text-primary"></i>
                                                 </a>
                                             </div>
-                                        @endcan
-                                        @can('bookings.destroy')
+                                        @endif
+                                        @if(auth()->user()->hasPermissionTo('bookings.delete'))
                                             <div class="col-md-3 col-sm-6 ml-2">
                                                 <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
                                                     onclick="Delete('{{ $booking->id }}')">
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </button>
                                             </div>
-                                        @endcan
+                                        @endif
                                         <div class="col-md-3 col-sm-6 ml-2 mt-1">
                                             <a href="{{ route('bookings.booking_papers', ['booking' => $booking->id]) }}"
                                                 class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">

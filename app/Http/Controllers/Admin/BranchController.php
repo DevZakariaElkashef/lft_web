@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 
 class BranchController extends Controller
 {
+     public function __construct()
+     {
+        $this->middleware('permission:branches.index')->only('index');
+        $this->middleware('permission:branches.create')->only(['create', 'store']);
+        $this->middleware('permission:branches.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:branches.delete')->only('destroy');
+     }
+    
     /**
      * Display a listing of the resource.
      *

@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:settings.index')->only('index');
+        $this->middleware('permission:settings.create')->only(['create', 'store']);
+        $this->middleware('permission:settings.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:settings.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

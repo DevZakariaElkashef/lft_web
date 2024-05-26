@@ -419,7 +419,7 @@
                                                 <span class="menu-text">{{ __('main.chooseUs') }}</span>
                                             </a>
                                         </li>
-                                    @endcan
+                                    @endif
 
                                     @if (auth()->user()->hasPermissionTo('sponsers.index'))
                                         <li class="menu-item menu-item-submenu" aria-haspopup="true"

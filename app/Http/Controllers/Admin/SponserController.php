@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class SponserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:sponsers.index')->only('index');
+        $this->middleware('permission:sponsers.create')->only(['create', 'store']);
+        $this->middleware('permission:sponsers.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:sponsers.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

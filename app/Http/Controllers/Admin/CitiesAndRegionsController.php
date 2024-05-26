@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class CitiesAndRegionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:cities.index')->only('index');
+        $this->middleware('permission:cities.create')->only(['create', 'store']);
+        $this->middleware('permission:cities.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:cities.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

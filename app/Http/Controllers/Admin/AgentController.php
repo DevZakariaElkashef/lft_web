@@ -19,6 +19,11 @@ class AgentController extends Controller
     public function __construct(PasswordResetAgentService $passwordResetAgentService)
     {
         $this->passwordResetAgentService = $passwordResetAgentService;
+
+        $this->middleware('permission:agents.index')->only('index');
+        $this->middleware('permission:agents.create')->only(['create', 'store']);
+        $this->middleware('permission:agents.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:agents.delete')->only('destroy');
     }
     public function index()
     {

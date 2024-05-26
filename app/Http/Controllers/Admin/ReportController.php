@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Notification;
 class ReportController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('permission:daily_reports.index')->only('daily_reports');
+    }
+
     public function agent_reports(Agent $agent)
     {
        $log_activities = LogActivity::orderBy('id', 'desc')->where("attacher_id",$agent->id)->where("attacher_type",Agent::class)->get();

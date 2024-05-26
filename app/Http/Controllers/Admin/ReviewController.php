@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:reviews.index')->only('index');
+        $this->middleware('permission:reviews.create')->only(['create', 'store']);
+        $this->middleware('permission:reviews.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:reviews.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

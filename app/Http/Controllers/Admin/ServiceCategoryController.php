@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class ServiceCategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:serviceCategories.index')->only('index');
+        $this->middleware('permission:serviceCategories.create')->only(['create', 'store']);
+        $this->middleware('permission:serviceCategories.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:serviceCategories.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

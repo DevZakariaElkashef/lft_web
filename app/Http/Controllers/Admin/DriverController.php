@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Notification;
 
 class DriverController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:drivers.index')->only('index');
+        $this->middleware('permission:drivers.create')->only(['create', 'store']);
+        $this->middleware('permission:drivers.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:drivers.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

@@ -12,7 +12,7 @@
                 <div class="card-toolbar">
                     <div class="">
                         <!--begin::Button-->
-                        @can('cars.create')
+                        @if(auth()->user()->hasPermissionTo('cars.create'))
                             <a href="{{ route('shipments.create', request()->id) }}" class="btn btn-primary font-weight-bolder">
                                 <span class="svg-icon svg-icon-md">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -29,7 +29,7 @@
                                     <!--end::Svg Icon-->
                                 </span>{{ __('admin.add') }}
                             </a>
-                        @endcan
+                        @endif
                     </div>
 
                     <!--end::Button-->
@@ -126,20 +126,20 @@
                                 <td>
                                     <div class="row">
                                         <div class="col-md-3 mr-3">
-                                            {{-- @can('cars.edit') --}}
+                                            @if(auth()->user()->hasPermissionTo('cars.update'))
                                             <a href="{{ route('shipments.edit', $shipment->id) }}"
                                                 class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
                                                 <i class="fas fa-edit text-primary"></i>
                                             </a>
-                                            {{-- @endcan --}}
+                                            @endif
                                         </div>
                                         <div class="col-md-3">
-                                            {{-- @can('cars.destroy') --}}
+                                            @if(auth()->user()->hasPermissionTo('cars.delete'))
                                             <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
                                                 onclick="Delete('{{ $shipment->id }}')">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </button>
-                                            {{-- @endcan --}}
+                                            @endif
                                         </div>
 
                                     </div>

@@ -41,11 +41,11 @@
                     {{ $service->price }}
                 </td>
                 <td>
-                    @can('service.destroy')
+                    @if(auth()->user()->hasPermissionTo('service.delete'))
                         <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="serviceDelete(event, '{{ $service->id }}')">
                             <i class="fas fa-trash text-danger"></i>
                         </button>
-                    @endcan
+                    @endif
                 </td>
             </tr>
         @empty

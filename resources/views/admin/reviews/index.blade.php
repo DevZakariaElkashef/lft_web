@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('reviews.create')
+                @if(auth()->user()->hasPermissionTo('reviews.create'))
                 <a href="{{route('reviews.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -50,16 +50,17 @@
                             </td>
                             <td>{{$review->created_at}}</td>
                             <td>
-                                @can('sponsers.edit')
+                                @if(auth()->user()->hasPermissionTo('sponsers.update'))
                                 <a href="{{route('reviews.edit',$review->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                @endcan
-                                @can('sponsers.destroy')
+                                @endif
+
+                                @if(auth()->user()->hasPermissionTo('sponsers.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $review->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class FactoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:factories.index')->only('index');
+        $this->middleware('permission:factories.create')->only(['create', 'store']);
+        $this->middleware('permission:factories.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:factories.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -106,6 +113,6 @@ class FactoryController extends Controller
     public function getBranches(Factory $factory)
     {
         $branches = $factory->branches->pluck('name', 'id')->toArray();
-        return response()->json(['status' => true, 'data' => $branches ], 200);
+        return response()->json(['status' => true, 'data' => $branches], 200);
     }
 }

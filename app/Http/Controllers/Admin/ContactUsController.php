@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ContactUsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:contactUs.index')->only('index');
+        $this->middleware('permission:contactUs.create')->only(['create', 'store']);
+        $this->middleware('permission:contactUs.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:contactUs.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

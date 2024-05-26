@@ -13,6 +13,13 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:services.index')->only('index');
+        $this->middleware('permission:services.create')->only(['create', 'store']);
+        $this->middleware('permission:services.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:services.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

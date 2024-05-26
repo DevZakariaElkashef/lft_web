@@ -24,6 +24,11 @@ class SuperagentController extends Controller
     public function __construct(PasswordResetSuperagentService $PasswordResetSuperagentService)
     {
         $this->PasswordResetSuperagentService = $PasswordResetSuperagentService;
+
+        $this->middleware('permission:superagents.index')->only('index');
+        $this->middleware('permission:superagents.create')->only(['create', 'store']);
+        $this->middleware('permission:superagents.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:superagents.delete')->only('destroy');
     }
     public function index()
     {

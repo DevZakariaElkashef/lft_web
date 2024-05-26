@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('employees.create')
+                @if(auth()->user()->hasPermissionTo('employees.create'))
                 <a href="{{route('employees.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -65,16 +65,16 @@
                             <td>{{$employee->note}}</td>
                             <td>{{$employee->created_at}}</td>
                             <td>
-                                @can('employees.edit')
+                                @if(auth()->user()->hasPermissionTo('employees.update'))
                                 <a href="{{route('employees.edit',$employee->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                @endcan
-                                @can('employees.destroy')
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('employees.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $employee->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                         @endforeach

@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('yards.create')
+                @if(auth()->user()->hasPermissionTo('yards.create'))
                 <a href="{{route('yards.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -42,16 +42,16 @@
                             <td>{{$yard->title}}</td>
                             <td>{{$yard->created_at}}</td>
                             <td>
-                                @can('yards.edit')
+                                @if(auth()->user()->hasPermissionTo('yards.update'))
                                 <a href="{{route('yards.edit',$yard->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                @endcan
-                                @can('yards.destroy')
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('yards.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $yard->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

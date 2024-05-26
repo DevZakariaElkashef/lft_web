@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('cities.create')
+                @if(auth()->user()->hasPermissionTo('cities.create'))
                 <a href="{{route('citiesAndRegions.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -42,16 +42,16 @@
                             <td>{{$city->title}}</td>
                             <td>{{$city->created_at}}</td>
                             <td>
-                                @can('cities.edit')
+                                @if(auth()->user()->hasPermissionTo('cities.update'))
                                 <a href="{{route('citiesAndRegions.edit',$city->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                @endcan
-                                @can('cities.destroy')
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('cities.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $city->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

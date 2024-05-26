@@ -8,6 +8,13 @@ use App\Models\OurService;
 
 class OurServiceController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:ourServices.index')->only('index');
+        $this->middleware('permission:ourServices.create')->only(['create', 'store']);
+        $this->middleware('permission:ourServices.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:ourServices.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

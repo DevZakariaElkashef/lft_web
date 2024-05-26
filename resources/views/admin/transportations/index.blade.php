@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                    @can('transportations.create')
+                @if(auth()->user()->hasPermissionTo('transportations.create'))
                     <a href="{{ $route_create }}" class="btn btn-primary font-weight-bolder">
                         <span class="svg-icon svg-icon-md">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                             <!--end::Svg Icon-->
                         </span>{{ __('admin.add') }}
                     </a>
-                    @endcan
+                    @endif
 
 {{--                    <div class="float-left ml-2">--}}
 {{--                        <button type="button" class="btn btn-success " id="imports"  data-toggle="modal" data-target="#import_excels">--}}
@@ -72,16 +72,16 @@
                                 {{$transportation->price}}
                             </td>
                             <td>
-                                @can('transportations.edit')
+                                @if(auth()->user()->hasPermissionTo('transportations.update'))
                                     <a href="{{route('companyTransportations.edit',[ 'companyTransportation' => $transportation->id, 'company_id' => ((isset(request()->company_id) && !is_null(request()->company_id)) ? request()->company_id : null) ])}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                         <i class="fas fa-edit text-primary"></i>
                                     </a>
-                                @endcan
-                                @can('transportations.destroy')
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('transportations.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $transportation->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

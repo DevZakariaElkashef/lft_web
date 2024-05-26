@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('shippingAgents.create')
+                @if(auth()->user()->hasPermissionTo('shippingAgents.create'))
                 <a href="{{route('shippingAgents.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -42,16 +42,16 @@
                             <td>{{$shippingAgent->title}}</td>
                             <td>{{$shippingAgent->created_at}}</td>
                             <td>
-                                @can('shippingAgents.edit')
+                                @if(auth()->user()->hasPermissionTo('shippingAgents.update'))
                                 <a href="{{route('shippingAgents.edit',$shippingAgent->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3">
                                     <i class="fas fa-edit text-primary"></i>
                                 </a>
-                                @endcan
-                                @can('shippingAgents.destroy')
+                                @endif
+                                @if(auth()->user()->hasPermissionTo('shippingAgents.delete'))
                                     <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $shippingAgent->id }}')">
                                         <i class="fas fa-trash text-danger"></i>
                                     </button>
-                                @endcan
+                                @endif
                             </td>
                         </tr>
                     @endforeach

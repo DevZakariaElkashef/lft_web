@@ -10,6 +10,14 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:cars.index')->only('index');
+        $this->middleware('permission:cars.create')->only(['create', 'store']);
+        $this->middleware('permission:cars.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:cars.delete')->only('destroy');   
+    }
     /**
      * Display a listing of the resource.
      *

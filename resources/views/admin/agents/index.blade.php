@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-                @can('agents.create')
+                @if(auth()->user()->hasPermissionTo('agents.create'))
                 <a href="{{route('agents.create')}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-                @endcan
+                @endif
                 <!--end::Button-->
             </div>
         </div>
@@ -59,18 +59,18 @@
                             <td>
                                 <div class="row">
                                     <div class="col-md-3 mr-3">
-                                        {{-- @can('agents.edit') --}}
+                                        @if(auth()->user()->hasPermissionTo('agents.update'))
                                         <a href="{{route('agents.edit',$agent->id)}}" class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
                                             <i class="fas fa-edit text-primary"></i>
                                         </a>
-                                        {{-- @endcan --}}
+                                        @endif
                                     </div>
                                     <div class="col-md-3">
-                                        {{-- @can('agents.destroy') --}}
+                                        @if(auth()->user()->hasPermissionTo('agents.delete'))
                                             <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete" onclick="Delete('{{ $agent->id }}')">
                                                 <i class="fas fa-trash text-danger"></i>
                                             </button>
-                                        {{-- @endcan --}}
+                                        @endif
                                     </div>
 
                                     <a class="btn btn-primary btn-sm" href="{{ route('reports.agent_reports', $agent->id) }}">{{__("main.reports")}}</a>

@@ -8,6 +8,14 @@ use App\Models\StaticPage;
 
 class StaticPageController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:staticPages.index')->only('index');
+        $this->middleware('permission:staticPages.create')->only(['create', 'store']);
+        $this->middleware('permission:staticPages.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:staticPages.delete')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *

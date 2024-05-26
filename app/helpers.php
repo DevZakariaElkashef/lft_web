@@ -118,7 +118,9 @@ if(!function_exists('adminDbTablesPermissions')){
             'yards',
             'daily_reports',
             'financial_custody_agents',
-            'permissions'
+            'permissions',
+            'transportations',
+            'shipments'
         ];
 
 
