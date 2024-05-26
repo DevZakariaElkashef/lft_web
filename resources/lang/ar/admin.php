@@ -441,5 +441,10 @@ return [
     'permissions.update' => 'تحديث إذن',
     'permissions.delete' => 'حذف إذن',
     "role" => "الدور",
-    "password" => 'كلمة المرور'
+    "password" => 'كلمة المرور',
+    "addition" => 'الإضافات',
+    "export_shipments" => 'استخراج الشحنات',
+    "filter" => "فلتر",
+    "from" => 'من',
+    'to' => "الى"
 ];

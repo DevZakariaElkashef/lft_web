@@ -72,7 +72,9 @@ return [
     "permissions" => "الصلاحيات",
     "back" => "عودة",
     "manage_users" => "إدارة المستخدمين",
-    "They_don't_have_roles" => "ليس لديهم أدوار"
+    "They_don't_have_roles" => "ليس لديهم أدوار",
+    "car_shipments" => 'شحونات السياره',
+    "added_by" => 'تم الإضافه بواسطة'
 
 
 

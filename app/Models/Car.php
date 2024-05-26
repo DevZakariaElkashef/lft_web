@@ -14,4 +14,9 @@ class Car extends Model
     {
         return date('Y-m-d', strtotime($value));
     }
+
+    public function shipments()
+    {
+        return $this->hasMany(Shipment::class);
+    }
 }

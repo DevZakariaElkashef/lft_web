@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\MoneyTransferController;
 use App\Http\Controllers\Admin\CompanyServicesController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\CompanyTransportationController;
+use App\Http\Controllers\Admin\ShipmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::get('/index', function () {
 
 Auth::routes();
 
+
 // ----------------- companyInvoice -----------------
 Route::prefix('companyInvoice')->group(function () {
     Route::get('/{id}', [companyInvoiceController::class, 'index'])->name('companyInvoice.index');
@@ -57,6 +59,21 @@ Route::prefix('companyInvoice')->group(function () {
     Route::get('/export/{from}/{to}/{company_id}', [companyInvoiceController::class, 'export'])->name('companyInvoice.export');
 });
 // ----------------- companyInvoice -----------------
+
+// ----------------- CarShipments -----------------
+Route::prefix('car_shipments')->group(function () {
+    Route::get('/{id}/car', [ShipmentController::class, 'index'])->name('shipments.index');
+    Route::get('/{id}/create', [ShipmentController::class, 'create'])->name('shipments.create');
+    Route::get('/{id}/edit', [ShipmentController::class, 'edit'])->name('shipments.edit');
+    Route::post('/store', [ShipmentController::class, 'store'])->name('shipments.store');
+    Route::put('/{id}/update', [ShipmentController::class, 'update'])->name('shipments.update');
+    Route::delete('/{id}/destroy', [ShipmentController::class, 'destroy'])->name('shipments.destroy');
+    Route::get('/{id}/export', [ShipmentController::class, 'export'])->name('shipments.export');
+});
+// ----------------- CarShipments -----------------
+
+
+
 
 // ----------------- Dashboard -----------------
 Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['auth'], 'prefix' => 'dashboard'], function () {
