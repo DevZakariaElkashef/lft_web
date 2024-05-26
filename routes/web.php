@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\AgentCarTranferController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CarController;
@@ -235,6 +235,18 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     // ----------------- agents -----------------
     Route::resource('agents', AgentController::class);
     // ----------------- \agents -----------------
+    
+    // ----------------- \agent car tranfer -----------------
+    Route::prefix('agent_car_transfer')->group(function () {
+        Route::post('/store', [AgentCarTranferController::class, 'store'])->name('agent_car_tranfer.store');
+        Route::get('/{id}', [AgentCarTranferController::class, 'index'])->name('agent_car_tranfer.index');
+        Route::get('/{id}/create', [AgentCarTranferController::class, 'create'])->name('agent_car_tranfer.create');
+        Route::get('/{id}/edit', [AgentCarTranferController::class, 'edit'])->name('agent_car_tranfer.edit');
+        Route::put('/{id}/update', [AgentCarTranferController::class, 'update'])->name('agent_car_tranfer.update');
+        Route::delete('/{id}/destroy', [AgentCarTranferController::class, 'destroy'])->name('agent_car_tranfer.destroy');
+        Route::get('/{id}/export', [AgentCarTranferController::class, 'export'])->name('agent_car_tranfer.export');
+    });
+    // ----------------- \agent car tranfer -----------------
 
     // ----------------- yards -----------------
     Route::resource('yards', YardController::class);
