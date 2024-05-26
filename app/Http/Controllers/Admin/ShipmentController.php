@@ -60,7 +60,7 @@ class ShipmentController extends Controller
             'name' => 'required|string|max:255',
             'value' => 'required|numeric',
             'date' => 'required|date',
-            'additions' => 'nullable|numeric'
+            'addition' => 'nullable|numeric'
         ]);
         $data['user_id'] = auth()->user()->id;
 
@@ -76,7 +76,7 @@ class ShipmentController extends Controller
             'name' => 'required|string|max:255',
             'value' => 'required|numeric',
             'date' => 'required|date',
-            'additions' => 'nullable|numeric'
+            'addition' => 'nullable|numeric'
         ]);
         $data['user_id'] = auth()->user()->id;
 
