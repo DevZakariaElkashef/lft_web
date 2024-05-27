@@ -7,7 +7,7 @@
         <div class="card-header flex-wrap py-5">
             <div class="card-toolbar">
                 <!--begin::Button-->
-              
+
                 <a href="{{$route_create}}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
@@ -21,7 +21,7 @@
                         <!--end::Svg Icon-->
                     </span>{{ __('admin.add') }}
                 </a>
-           
+
                 <!--end::Button-->
             </div>
         </div>
@@ -46,10 +46,10 @@
                             <td>{{$financial_custody_agent->value}}</td>
                             <td>{{$financial_custody_agent->created_at}}</td>
                             <td>
-                             
-                                    <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $financial_custody_agent->id }}')">
+
+                                    <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="Delete('{{ $financial_custody_agent->id }}', '{{ $financial_custody_agent->transfered_id }}')">
                                         <i class="fas fa-trash text-danger"></i>
-                                    </button>                            
+                                    </button>
                             </td>
                         </tr>
                     @endforeach
@@ -66,7 +66,7 @@
             "use strict";s
         })(jQuery);
 
-        function Delete(id) {
+        function Delete(id, agent_id) {
             Swal.fire({
                 title: "{{ __('alerts.are_you_sure') }}",
                 text: "{{ __('alerts.not_revert_information') }}",
@@ -76,7 +76,7 @@
                 cancelButtonText: "{{ __('alerts.cancel') }}",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var url = '{{ route("financial_custody_agents.destroy", ":id") }}';
+                    var url = '{{ route("financial_custody_agents.destroy", ":id") }}' + '?agent_id=' + agent_id;
                     url = url.replace(':id', id);
                     var token = '{{ csrf_token() }}';
 
@@ -84,6 +84,7 @@
                         headers: {
                             'X-CSRF-TOKEN': token,
                             'X-Requested-With': 'XMLHttpRequest',
+
                         }
                     });
                     $.ajax({

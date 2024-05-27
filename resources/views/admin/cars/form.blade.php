@@ -14,17 +14,13 @@
                             <small class="aleart text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    .<div class="form-group">
-                        <label for="walletInput">{{ __('admin.wallet') }}</label>
-                        <input id="walletInput" class="form-control" type="number" name="wallet" value="{{ isset($car) ? (old('wallet') ?? $car->wallet) : old('wallet') }}">
-                    </div>
                 </div>
                 <!-- For loop this div -->
 
-             
 
-        
-             
+
+
+
             </div>
         </div>
 

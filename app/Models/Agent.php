@@ -55,6 +55,11 @@ class Agent extends  Authenticatable implements JWTSubject
         return $this->hasMany(AgentExpense::class);
     }
 
+    public function agentCarTransfers(): HasMany
+    {
+        return $this->hasMany(AgentCarTranfer::class);
+    }
+
     public function financial_custodies(): MorphMany
     {
         return $this->MorphMany(MoneyTransfer::class, "transfered");

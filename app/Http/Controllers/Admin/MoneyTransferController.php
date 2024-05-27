@@ -45,6 +45,7 @@ class MoneyTransferController extends Controller
     {
 
         $agent = Agent::find($request->agent_id);
+        $agent->update(['wallet' => $agent->wallet + $request->value]);
 
         $data["value"] = $request->value;
         $data["transfered_type"] = "App\Models\Agent";
@@ -65,7 +66,7 @@ class MoneyTransferController extends Controller
         return redirect()->route('financial_custody_agents.index')->with(['success' => __('alerts.added_successfully')]);
     }
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
         $MoneyTransfer = MoneyTransfer::find($id);
         $MoneyTransfer->delete();

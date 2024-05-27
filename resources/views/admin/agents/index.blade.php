@@ -59,7 +59,7 @@
                                 </td>
 
                                 <td>
-                                    {{ $agent->financial_custodies->where('type', 1)->sum('value') - $agent->financial_custodies->where('type', 2)->sum('value') }}
+                                    {{ $agent->wallet }}
                                 </td>
 
 
