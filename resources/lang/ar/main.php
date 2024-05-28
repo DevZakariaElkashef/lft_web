@@ -75,7 +75,13 @@ return [
     "They_don't_have_roles" => "ليس لديهم أدوار",
     "car_shipments" => 'شحونات السياره',
     "added_by" => 'تم الإضافه بواسطة',
-    "car_wallet_does_not_have_enough_amount" => 'ميزانية السياره لا تمتلك المال الكافى'
+    "car_wallet_does_not_have_enough_amount" => 'ميزانية السياره لا تمتلك المال الكافى',
+    "bank" => 'الخزنه/البنك',
+    "operation_name" => 'اسم العملية',
+    'amount' => 'المبلغ',
+    "debit" => 'سحب',
+    'credit' => 'إيداع',
+    "bank_balance" => 'ميزانية البنك'
 
 
 

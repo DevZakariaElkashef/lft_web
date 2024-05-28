@@ -460,163 +460,182 @@
                                             </a>
                                         </li>
                                     @endif
-                            </ul>
-                        </div>
-                    </li>
-                @endif
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
 
-                @if (in_array('Admin', auth()->user()->roles->pluck('name')->toArray()))
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        <a href="javascript:;" class="menu-link menu-toggle">
-                            <span class="svg-icon menu-icon">
-                                <i class="fas fa-users"></i>
-                            </span>
-                            <span class="menu-text">{{ __('main.manage_users') }}</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="menu-submenu">
-                            <i class="menu-arrow"></i>
-                            <ul class="menu-subnav">
-                                <li class="menu-item menu-item-parent" aria-haspopup="true">
-                                    <span class="menu-link">
-                                        <span class="menu-text">{{ __('main.manage_users') }}</span>
-                                    </span>
-                                </li>
+                    @if (in_array('Admin', auth()->user()->roles->pluck('name')->toArray()))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                            <a href="javascript:;" class="menu-link menu-toggle">
+                                <span class="svg-icon menu-icon">
+                                    <i class="fas fa-users"></i>
+                                </span>
+                                <span class="menu-text">{{ __('main.manage_users') }}</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="menu-submenu">
+                                <i class="menu-arrow"></i>
+                                <ul class="menu-subnav">
+                                    <li class="menu-item menu-item-parent" aria-haspopup="true">
+                                        <span class="menu-link">
+                                            <span class="menu-text">{{ __('main.manage_users') }}</span>
+                                        </span>
+                                    </li>
 
 
 
-                                @foreach (\Spatie\Permission\Models\Role::all() as $role)
+                                    @foreach (\Spatie\Permission\Models\Role::all() as $role)
+                                        <li class="menu-item menu-item-submenu" aria-haspopup="true"
+                                            data-menu-toggle="hover">
+                                            <a href="{{ route('users.index', ['role' => $role->name]) }}"
+                                                id="static-pages-link" class="menu-link">
+                                                <span class="menu-text">{{ $role->name }}</span>
+                                            </a>
+                                        </li>
+                                    @endforeach
                                     <li class="menu-item menu-item-submenu" aria-haspopup="true"
                                         data-menu-toggle="hover">
-                                        <a href="{{ route('users.index', ['role' => $role->name]) }}"
-                                            id="static-pages-link" class="menu-link">
-                                            <span class="menu-text">{{ $role->name }}</span>
+                                        <a href="{{ route('users.index') }}" id="static-pages-link"
+                                            class="menu-link">
+                                            <span class="menu-text">{{ __("main.They_don't_have_roles") }}</span>
                                         </a>
                                     </li>
-                                @endforeach
-                                <li class="menu-item menu-item-submenu" aria-haspopup="true"
-                                    data-menu-toggle="hover">
-                                    <a href="{{ route('users.index') }}" id="static-pages-link"
-                                        class="menu-link">
-                                        <span class="menu-text">{{ __("main.They_don't_have_roles") }}</span>
+
+
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
+
+                    @if (auth()->user()->hasPermissionTo('banks.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+
+                            <a href="{{ route('banks.index') }}" id="banks-link" class="menu-link">
+                                <span class="svg-icon menu-icon text-muted">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#b5b5c3"
+                                            d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H344V224H280V416H232V224H168V416H128V224zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                                    </svg>
+                                </span>
+                                <span class="menu-text">{{ __('main.bank') }}</span>
+                            </a>
+                        </li>
+                    @endif
+
+
+
+                    @if (auth()->user()->hasPermissionTo('permissions.index'))
+                        <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+
+                            <a href="{{ route('permissions.index') }}" id="permissions-link" class="menu-link">
+                                <span class="svg-icon menu-icon text-muted">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                        <path fill="#b5b5c3"
+                                            d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z" />
+                                    </svg>
+                                </span>
+                                <span class="menu-text">{{ __('main.permissions') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+                <!--end::Menu Nav-->
+            </div>
+            <!--end::Menu Container-->
+        </div>
+        <!--end::Aside Menu-->
+    </div>
+    <!--end::Aside-->
+    <!--begin::Wrapper-->
+    <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+
+        <!--begin::Header-->
+        <div id="kt_header" class="header header-fixed">
+            <!--begin::Container-->
+            <div class="container-fluid d-flex align-items-stretch justify-content-between">
+                <!--begin::Header Menu Wrapper-->
+                <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
+                    <!--begin::Header Menu-->
+                    <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
+                        <!--begin::Header Nav-->
+                        <ul class="menu-nav">
+                        </ul>
+                        <!--end::Header Nav-->
+                    </div>
+                    <!--end::Header Menu-->
+                </div>
+                <!--end::Header Menu Wrapper-->
+                <!--begin::Topbar-->
+                <div class="topbar">
+                    <!--begin::User-->
+                    <div class="dropdown">
+                        <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
+                            <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
+                                id="kt_quick_user_toggle">
+                                <span
+                                    class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
+                                <span
+                                    class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ auth()->user()->name }}</span>
+                                <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
+                                    <span class="symbol-label font-size-h5 font-weight-bold">A</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
+                            <ul class="navi navi-hover py-4">
+                                <!--begin::Item-->
+                                <li class="navi-item">
+                                    <a class="dropdown-item navi-link" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                        <span class="navi-text">{{ __('Logout') }}</span>
                                     </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
                                 </li>
-
-
                             </ul>
                         </div>
-                    </li>
-                @endif
-                
-                @if (auth()->user()->hasPermissionTo('permissions.index'))
-                    <li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-
-                        <a href="{{ route('permissions.index') }}" id="permissions-link" class="menu-link">
-                            <span class="svg-icon menu-icon text-muted">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
-                                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                    <path fill="#b5b5c3"
-                                        d="M256 0c4.6 0 9.2 1 13.4 2.9L457.7 82.8c22 9.3 38.4 31 38.3 57.2c-.5 99.2-41.3 280.7-213.6 363.2c-16.7 8-36.1 8-52.8 0C57.3 420.7 16.5 239.2 16 140c-.1-26.2 16.3-47.9 38.3-57.2L242.7 2.9C246.8 1 251.4 0 256 0z" />
-                                </svg>
-                            </span>
-                            <span class="menu-text">{{ __('main.permissions') }}</span>
-                        </a>
-                    </li>
-                @endif
-            </ul>
-            <!--end::Menu Nav-->
-        </div>
-        <!--end::Menu Container-->
-    </div>
-    <!--end::Aside Menu-->
-</div>
-<!--end::Aside-->
-<!--begin::Wrapper-->
-<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-
-    <!--begin::Header-->
-    <div id="kt_header" class="header header-fixed">
-        <!--begin::Container-->
-        <div class="container-fluid d-flex align-items-stretch justify-content-between">
-            <!--begin::Header Menu Wrapper-->
-            <div class="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
-                <!--begin::Header Menu-->
-                <div id="kt_header_menu" class="header-menu header-menu-mobile header-menu-layout-default">
-                    <!--begin::Header Nav-->
-                    <ul class="menu-nav">
-                    </ul>
-                    <!--end::Header Nav-->
-                </div>
-                <!--end::Header Menu-->
-            </div>
-            <!--end::Header Menu Wrapper-->
-            <!--begin::Topbar-->
-            <div class="topbar">
-                <!--begin::User-->
-                <div class="dropdown">
-                    <div class="topbar-item" data-toggle="dropdown" data-offset="10px,0px">
-                        <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2"
-                            id="kt_quick_user_toggle">
-                            <span
-                                class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">Hi,</span>
-                            <span
-                                class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">{{ auth()->user()->name }}</span>
-                            <span class="symbol symbol-lg-35 symbol-25 symbol-light-success">
-                                <span class="symbol-label font-size-h5 font-weight-bold">A</span>
-                            </span>
-                        </div>
                     </div>
-                    <div class="dropdown-menu p-0 m-0 dropdown-menu-anim-up dropdown-menu-sm dropdown-menu-right">
-                        <ul class="navi navi-hover py-4">
-                            <!--begin::Item-->
-                            <li class="navi-item">
-                                <a class="dropdown-item navi-link" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    <span class="navi-text">{{ __('Logout') }}</span>
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
+                    <!--end::User-->
                 </div>
-                <!--end::User-->
+                <!--end::Topbar-->
             </div>
-            <!--end::Topbar-->
+            <!--end::Container-->
         </div>
-        <!--end::Container-->
-    </div>
-    <!--end::Header-->
+        <!--end::Header-->
 
-    <!--begin::Content-->
-    <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
-        @yield('content')
-    </div>
-    <!--end::Content-->
-
-    <!--begin::Footer-->
-    <div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
-        <!--begin::Container-->
-        <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
-            <!--begin::Copyright-->
-            <div class="text-dark order-2 order-md-1">
-                <span class="text-muted font-weight-bold mr-2">2023©</span>
-                <a href="{{ route('main') }}" class="text-dark-75 text-hover-primary">LeaderForTrans</a>
-            </div>
-            <!--end::Copyright-->
-            <!--begin::Nav-->
-            <div class="nav nav-dark">
-            </div>
-            <!--end::Nav-->
+        <!--begin::Content-->
+        <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+            @yield('content')
         </div>
-        <!--end::Container-->
+        <!--end::Content-->
+
+        <!--begin::Footer-->
+        <div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+            <!--begin::Container-->
+            <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between">
+                <!--begin::Copyright-->
+                <div class="text-dark order-2 order-md-1">
+                    <span class="text-muted font-weight-bold mr-2">2023©</span>
+                    <a href="{{ route('main') }}" class="text-dark-75 text-hover-primary">LeaderForTrans</a>
+                </div>
+                <!--end::Copyright-->
+                <!--begin::Nav-->
+                <div class="nav nav-dark">
+                </div>
+                <!--end::Nav-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Footer-->
     </div>
-    <!--end::Footer-->
-</div>
-<!--end::Wrapper-->
+    <!--end::Wrapper-->
 
 </div>
 
@@ -630,7 +649,7 @@
 </script>
 
 <style>
-.aside-menu .menu-nav {
-    margin-top: 2rem;
-}
+    .aside-menu .menu-nav {
+        margin-top: 2rem;
+    }
 </style>

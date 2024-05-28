@@ -2,21 +2,40 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Agent;
-use App\Models\AgentCarTranfer;
 use App\Models\Car;
+use App\Models\Agent;
 use Illuminate\Http\Request;
+use App\Models\AgentCarTranfer;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\AgentCarTranferExport;
 
 class AgentCarTranferController extends Controller
 {
-    public function index($id)
+    public function index(Request $request, $id)
     {
         $agent = Agent::findOrFail($id);
 
-        $items = $agent->agentCarTransfers;
+        $items = AgentCarTranfer::query();
+
+
+        if($request->filled('date_from')) {
+            $items->whereDate('created_at', '>=', $request->date_from);
+        }
+
+        if($request->filled('date_to')) {
+            $items->whereDate('created_at', '<=', $request->date_to);
+        }
+
+        $items = $items->where('agent_id', $agent->id)->get();
 
         return view('admin.agents_car_tranfer.index', compact('agent', 'items'));
+    }
+
+    public function export(Request $request, $id)
+    {
+        $ids = explode(',', $request->ids);
+        return Excel::download(new AgentCarTranferExport($ids), 'agents_car_tranfer.xlsx');
     }
 
 

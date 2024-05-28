@@ -414,5 +414,7 @@ return [
     "filter" => 'Filter',
     'from' => 'From', 
     'to' => 'To',
-    "wallet" => 'Wallet'
+    "wallet" => 'Wallet',
+    'note' => 'Note',
+    'export' => 'Export
 ];

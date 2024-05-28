@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\YardController;
 use App\Http\Controllers\Admin\AgentController;
+use App\Http\Controllers\Admin\BankController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\BookingController;
@@ -259,6 +260,11 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     // ----------------- drivers -----------------
     Route::resource('drivers', DriverController::class);
     // ----------------- drivers -----------------
+
+    // ----------------- banks -----------------
+    Route::resource('banks', BankController::class);
+    Route::get('banks-exports', [BankController::class, 'export'])->name('banks.export');
+    // ----------------- banks -----------------
 
     // ----------------- cars -----------------
     Route::resource('cars', CarController::class);

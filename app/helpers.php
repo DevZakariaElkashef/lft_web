@@ -120,7 +120,8 @@ if(!function_exists('adminDbTablesPermissions')){
             'financial_custody_agents',
             'permissions',
             'transportations',
-            'shipments'
+            'shipments',
+            'banks'
         ];
 
 
