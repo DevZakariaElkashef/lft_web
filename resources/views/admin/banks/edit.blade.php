@@ -4,7 +4,7 @@
     <div class="bankd bankd-custom gutter-b">
         <div class="bankd-header">
             <div class="bankd-title">
-                {{ __('admin.edit_bank') }}
+                {{ __('main.banks') }}
             </div>
         </div>
         @include('admin.banks.form')

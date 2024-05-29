@@ -81,7 +81,9 @@ return [
     'amount' => 'المبلغ',
     "debit" => 'سحب',
     'credit' => 'إيداع',
-    "vault_balance" => 'ميزانية الخزنة'
+    "vault_balance" => 'ميزانية الخزنة',
+    "banks" => 'البنوك',
+    "balance" => 'الرصيد'
 
 
 

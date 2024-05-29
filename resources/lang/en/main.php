@@ -56,6 +56,8 @@ return [
     "debit" => "Debit",
     "credit" => "Credit",
     "bank_balance" => "Bank Balance",
+    'banks' => "Banks",
+    "balance" => 'Balance'
     // ------------------ Main ------------------
 
 ];

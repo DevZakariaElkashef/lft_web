@@ -24,28 +24,10 @@ class BankController extends Controller
      */
     public function index(Request $request)
     {
-        $banks = Bank::query();
-
-        if ($request->filled('date_from')) {
-            $banks->whereDate('created_at', '>=', $request->date_from);
-        }
-
-        if ($request->filled('date_to')) {
-            $banks->whereDate('created_at', '<=', $request->date_to);
-        }
-
-        $banks = $banks->get();
-
+        $banks = Bank::get();
         return view('admin.banks.index', compact('banks'));
     }
 
-
-
-    public function export(Request $request)
-    {
-        $ids = explode(',', $request->ids);
-        return Excel::download(new BankExport($ids), 'bank.xlsx');
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -72,8 +54,6 @@ class BankController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'amount' => 'required|numeric',
-            'note' => 'nullable|string',
-            'type' => 'required|in:0,1'
         ]);
 
         Bank::create($request->all());
@@ -97,21 +77,16 @@ class BankController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
             'amount' => 'required|numeric',
-            'note' => 'nullable|string',
-            'type' => 'required|in:0,1'
         ]);
 
-        // Find the bank transaction
-        $transaction = Bank::findOrFail($id);
+        $bank = Bank::findOrFail($id);
 
-        // Update the transaction
-        $transaction->update($request->all());
+        $bank->update($request->all());
 
-        return back()->with('success', __('main.transaction_updated_successfully'));
+        return redirect()->route('banks.index')->with('success', __('alerts.updated_successfully'));
     }
 
     public function destroy(Bank $bank)

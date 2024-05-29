@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        @include('layouts.includes.breadcrumb', ['page' => __('main.bank')])
+        @include('layouts.includes.breadcrumb', ['page' => __('main.banks')])
         <!--begin::Bankd-->
         <div class="bankd bankd-custom">
             <div class="bankd-header row justify-content-between align-items-center flex-wrap py-5">
@@ -28,58 +28,7 @@
                     <!--end::Button-->
                 </div>
                 <div class="">
-                    <p>
-                        {{ __('main.bank_balance') }}: {{ App\Models\Bank::calculateNetAmount() }}
-                    </p>
-                    <p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                            {{ __('admin.filter') }}
-                        </button>
-                        <a href="{{ route('banks.export', ['ids' => implode(',', $banks->pluck('id')->toArray())]) }}"
-                            class="btn btn-secondary">
-                            {{ __('admin.export') }}
-                        </a>
-
-
-                        <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">{{ __('admin.filter') }}</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        X
-                                    </button>
-                                </div>
-                                <form action="{{ route('banks.index') }}" method="get">
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="dateFrom">{{ __('admin.from') }}</label>
-                                                    <input id="dateFrom" class="form-control" type="date"
-                                                        name="date_from">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="dateTo">{{ __('admin.to') }}</label>
-                                                    <input id="dateTo" class="form-control" type="date"
-                                                        name="date_to">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">{{ __('admin.filter') }}</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    </p>
+                   
                 </div>
             </div>
             <div class="bankd-body">
@@ -88,8 +37,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">{{ __('main.operation_name') }}</th>
-                            <th scope="col">{{ __('main.amount') }}</th>
-                            <th scope="col">{{ __('admin.type') }}</th>
+                            <th scope="col">{{ __('main.balance') }}</th>
                             <th scope="col">{{ __('admin.created_at') }}</th>
                             <th scope="col"></th>
                         </tr>
@@ -104,10 +52,6 @@
 
                                 <td>
                                     {{ $bank->amount }}
-                                </td>
-
-                                <td>
-                                    {{ $bank->type_name }}
                                 </td>
 
                                 <td>{{ $bank->created_at }}</td>
