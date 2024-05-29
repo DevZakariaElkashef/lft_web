@@ -43,8 +43,7 @@
                 <select name="company_id" id="" class="form-control selectpicker">
                     <option value="">{{ __('admin.select') }}</option>
                     @foreach ($companies as $company)
-                        <option {{ old('company_id') == $company->id ? 'selected' : '' }}
-                            value="{{ $company->id }}">{{ $company->name }}</option>
+                        <option @if(old('company_id') == $company->id) selected @endif>{{ $company->name }}</option>
                     @endforeach
                 </select>
             </div>

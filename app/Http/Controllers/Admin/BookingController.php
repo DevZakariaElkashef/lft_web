@@ -58,7 +58,7 @@ class BookingController extends Controller
             foreach ($company->employees as $employee)
                 $company_employees[$company->id][$employee->id] = $employee->name;
         return [
-            'companies'         => $companies->pluck('name', 'id'),
+            'companies'         => $companies,
             'company_employees' => $company_employees,
             'shipping_agents'   => shippingAgent::pluck('title', 'id'),
             'type_of_actions'   => bookingActions(),
