@@ -41,7 +41,7 @@
                     {{ $service->price }}
                 </td>
                 <td>
-                    @if(auth()->user()->hasPermissionTo('service.delete'))
+                    @if(auth()->user()->hasPermissionTo('services.delete'))
                         <button class="btn btn-icon btn-light btn-hover-danger btn-sm delete" onclick="serviceDelete(event, '{{ $service->id }}')">
                             <i class="fas fa-trash text-danger"></i>
                         </button>

@@ -23,15 +23,13 @@ class ReportController extends Controller
 
     public function agent_reports(Agent $agent)
     {
-       $log_activities = LogActivity::orderBy('id', 'desc')->where("attacher_id",$agent->id)->where("attacher_type",Agent::class)->get();
+        $log_activities = LogActivity::orderBy('id', 'desc')->where("attacher_id", $agent->id)->where("attacher_type", Agent::class)->get();
         return view('admin.agents.reports.index', compact("log_activities"));
     }
 
     public function daily_reports()
     {
-        $log_activities = LogActivity::orderBy('id', 'desc')->whereDate("created_at",now())->get();
+        $log_activities = LogActivity::orderBy('id', 'desc')->whereDate("created_at", now())->get();
         return view('admin.reports.index', compact("log_activities"));
     }
-
-
 }
