@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\CarController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\YardController;
 use App\Http\Controllers\Admin\AgentController;
-use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\VaultController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\BookingController;
@@ -236,7 +236,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     // ----------------- agents -----------------
     Route::resource('agents', AgentController::class);
     // ----------------- \agents -----------------
-    
+
     // ----------------- \agent car tranfer -----------------
     Route::prefix('agent_car_transfer')->group(function () {
         Route::post('/store', [AgentCarTranferController::class, 'store'])->name('agent_car_tranfer.store');
@@ -262,8 +262,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     // ----------------- drivers -----------------
 
     // ----------------- banks -----------------
-    Route::resource('banks', BankController::class);
-    Route::get('banks-exports', [BankController::class, 'export'])->name('banks.export');
+    Route::resource('vaults', VaultController::class);
+    Route::get('vaults-exports', [VaultController::class, 'export'])->name('vaults.export');
     // ----------------- banks -----------------
 
     // ----------------- cars -----------------

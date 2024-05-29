@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('banks', function (Blueprint $table) {
+        Schema::create('vaults', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
             $table->string('amount')->nullable();
             $table->integer('type')->nullable()->comment('0 => Debit, 1 => Credit');
-            $table->text('note');
+            $table->text('note')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -2,12 +2,12 @@
 
 namespace App\Exports;
 
-use App\Models\Bank;
+use App\Models\Vault;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class BankExport implements FromCollection, ShouldAutoSize, WithHeadings
+class VaultExport implements FromCollection, ShouldAutoSize, WithHeadings
 {
     public $ids;
 
@@ -21,7 +21,7 @@ class BankExport implements FromCollection, ShouldAutoSize, WithHeadings
      */
     public function collection()
     {
-        return Bank::whereIn('id', $this->ids)->get()->map(function ($bank) {
+        return Vault::whereIn('id', $this->ids)->get()->map(function ($bank) {
             return [
                 'id' => $bank->id,
                 'name' => $bank->name,

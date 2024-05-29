@@ -98,11 +98,11 @@ if(!function_exists('adminDbTablesPermissions')){
             'agents',
             'drivers',
             'cars',
-            'employees', 
-            'factories', 
-            'branches', 
+            'employees',
+            'factories',
+            'branches',
             'cities',
-            'containers', 
+            'containers',
             'serviceCategories',
             'services',
             'shippingAgents',
@@ -113,15 +113,15 @@ if(!function_exists('adminDbTablesPermissions')){
             'reviews',
             'settings',
             'contactUs',
-            'users', 
-            'bookings', 
+            'users',
+            'bookings',
             'yards',
             'daily_reports',
             'financial_custody_agents',
             'permissions',
             'transportations',
             'shipments',
-            'banks'
+            'vaults'
         ];
 
 

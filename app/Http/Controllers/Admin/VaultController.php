@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\BankExport;
-use App\Models\Bank;
+use App\Exports\VaultExport;
+use App\Models\Vault;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 
-class BankController extends Controller
+class VaultController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:banks.index')->only('index');
-        $this->middleware('permission:banks.create')->only(['create', 'store']);
-        $this->middleware('permission:banks.udpate')->only(['edit', 'udpate']);
-        $this->middleware('permission:banks.delete')->only('destroy');
+        $this->middleware('permission:vault.index')->only('index');
+        $this->middleware('permission:vault.create')->only(['create', 'store']);
+        $this->middleware('permission:vault.udpate')->only(['edit', 'udpate']);
+        $this->middleware('permission:vault.delete')->only('destroy');
     }
     /**
      * Display a listing of the resource.
@@ -24,19 +24,19 @@ class BankController extends Controller
      */
     public function index(Request $request)
     {
-        $banks = Bank::query();
+        $vaults = Vault::query();
 
         if($request->filled('date_from')) {
-            $banks->whereDate('created_at', '>=', $request->date_from);
+            $vaults->whereDate('created_at', '>=', $request->date_from);
         }
 
         if($request->filled('date_to')) {
-            $banks->whereDate('created_at', '<=', $request->date_to);
+            $vaults->whereDate('created_at', '<=', $request->date_to);
         }
 
-        $banks = $banks->get();
+        $vaults = $vaults->get();
 
-        return view('admin.banks.index', compact('banks'));
+        return view('admin.vaults.index', compact('vaults'));
     }
 
 
@@ -44,7 +44,7 @@ class BankController extends Controller
     public function export(Request $request)
     {
         $ids = explode(',', $request->ids);
-        return Excel::download(new BankExport($ids), 'bank.xlsx');
+        return Excel::download(new VaultExport($ids), 'vault.xlsx');
     }
     /**
      * Show the form for creating a new resource.
@@ -55,10 +55,10 @@ class BankController extends Controller
     {
         $input = [
             'method'    => 'POST',
-            'action'    => route('banks.store')
+            'action'    => route('vaults.store')
         ];
 
-        return view('admin.banks.create', $input);
+        return view('admin.vaults.create', $input);
     }
 
     /**
@@ -76,22 +76,22 @@ class BankController extends Controller
             'type' => 'required|in:0,1'
         ]);
 
-        Bank::create($request->all());
+        Vault::create($request->all());
 
-        return redirect()->route('banks.index')
+        return redirect()->route('vaults.index')
             ->with('success', __('alerts.added_successfully'));
     }
 
 
-    public function edit(Bank $bank)
+    public function edit(Vault $vault)
     {
         $input = [
             'method'    => 'PUT',
-            'action'    => route('banks.update', $bank->id),
-            'bank'   => $bank,
+            'action'    => route('vaults.update', $vault->id),
+            'vault'   => $vault,
         ];
 
-        return view('admin.banks.edit', $input);
+        return view('admin.vaults.edit', $input);
     }
 
 
@@ -105,8 +105,8 @@ class BankController extends Controller
             'type' => 'required|in:0,1'
         ]);
 
-        // Find the bank transaction
-        $transaction = Bank::findOrFail($id);
+        // Find the vault transaction
+        $transaction = Vault::findOrFail($id);
 
         // Update the transaction
         $transaction->update($request->all());
@@ -114,9 +114,9 @@ class BankController extends Controller
         return back()->with('success', __('main.transaction_updated_successfully'));
     }
 
-    public function destroy(Bank $bank)
+    public function destroy(Vault $vault)
     {
-        $bank->delete();
+        $vault->delete();
         return response()->json(['staus' => true, 'msg' => __('alerts.deleted_successfully')], 200);
     }
 }

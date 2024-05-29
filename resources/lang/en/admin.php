@@ -412,9 +412,9 @@ return [
     "addition" => 'Addition',
     "export_shipments" => 'Export Shipments',
     "filter" => 'Filter',
-    'from' => 'From', 
+    'from' => 'From',
     'to' => 'To',
     "wallet" => 'Wallet',
     'note' => 'Note',
-    'export' => 'Export
+    'export' => 'Export'
 ];

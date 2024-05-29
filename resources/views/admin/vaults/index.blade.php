@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container">
-        @include('layouts.includes.breadcrumb', ['page' => __('main.bank')])
-        <!--begin::Bankd-->
-        <div class="bankd bankd-custom">
-            <div class="bankd-header row justify-content-between align-items-center flex-wrap py-5">
-                <div class="bankd-toolbar">
+        @include('layouts.includes.breadcrumb', ['page' => __('main.vault')])
+        <!--begin::Vaultd-->
+        <div class="vaultd vaultd-custom">
+            <div class="vaultd-header row justify-content-between align-items-center flex-wrap py-5">
+                <div class="vaultd-toolbar">
                     <!--begin::Button-->
-                    @if (auth()->user()->hasPermissionTo('banks.create'))
-                        <a href="{{ route('banks.create') }}" class="btn btn-primary font-weight-bolder">
+                    @if (auth()->user()->hasPermissionTo('vaults.create'))
+                        <a href="{{ route('vaults.create') }}" class="btn btn-primary font-weight-bolder">
                             <span class="svg-icon svg-icon-md">
                                 <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -29,13 +29,13 @@
                 </div>
                 <div class="">
                     <p>
-                        {{ __('main.bank_balance') }}: {{ App\Models\Bank::calculateNetAmount() }}
+                        {{ __('main.vault_balance') }}: {{ App\Models\Vault::calculateNetAmount() }}
                     </p>
                     <p>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                             {{ __('admin.filter') }}
                         </button>
-                        <a href="{{ route('banks.export', ['ids' => implode(',', $banks->pluck('id')->toArray())]) }}"
+                        <a href="{{ route('vaults.export', ['ids' => implode(',', $vaults->pluck('id')->toArray())]) }}"
                             class="btn btn-secondary">
                             {{ __('admin.export') }}
                         </a>
@@ -52,7 +52,7 @@
                                         X
                                     </button>
                                 </div>
-                                <form action="{{ route('banks.index') }}" method="get">
+                                <form action="{{ route('vaults.index') }}" method="get">
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col-md-6">
@@ -82,7 +82,7 @@
                     </p>
                 </div>
             </div>
-            <div class="bankd-body">
+            <div class="vaultd-body">
                 <table class="table table-responsive-xl" id="table">
                     <thead class="thead-light">
                         <tr>
@@ -95,37 +95,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($banks as $bank)
+                        @foreach ($vaults as $vault)
                             <tr>
-                                <th scope="row">{{ $bank->id }}</th>
+                                <th scope="row">{{ $vault->id }}</th>
                                 <td>
-                                    {{ $bank->name }}
+                                    {{ $vault->name }}
                                 </td>
 
                                 <td>
-                                    {{ $bank->amount }}
+                                    {{ $vault->amount }}
                                 </td>
 
                                 <td>
-                                    {{ $bank->type_name }}
+                                    {{ $vault->type_name }}
                                 </td>
 
-                                <td>{{ $bank->created_at }}</td>
+                                <td>{{ $vault->created_at }}</td>
 
                                 <td>
                                     <div class="row">
                                         <div class="col-md-3 mr-3">
-                                            @if (auth()->user()->hasPermissionTo('banks.update'))
-                                                <a href="{{ route('banks.edit', $bank->id) }}"
+                                            @if (auth()->user()->hasPermissionTo('vaults.update'))
+                                                <a href="{{ route('vaults.edit', $vault->id) }}"
                                                     class="btn btn-icon btn-light btn-hover-primary btn-sm mx-3 ">
                                                     <i class="fas fa-edit text-primary"></i>
                                                 </a>
                                             @endif
                                         </div>
                                         <div class="col-md-3">
-                                            @if (auth()->user()->hasPermissionTo('banks.delete'))
+                                            @if (auth()->user()->hasPermissionTo('vaults.delete'))
                                                 <button class="btn btn-icon btn-light btn-hover-danger btn-sm mx-3 delete"
-                                                    onclick="Delete('{{ $bank->id }}')">
+                                                    onclick="Delete('{{ $vault->id }}')">
                                                     <i class="fas fa-trash text-danger"></i>
                                                 </button>
                                             @endif
@@ -139,7 +139,7 @@
                 </table>
             </div>
         </div>
-        <!--end::Bankd-->
+        <!--end::Vaultd-->
     </div>
 @endsection
 @push('js')
@@ -154,7 +154,7 @@
                 cancelButtonText: "{{ __('alerts.cancel') }}",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var url = '{{ route('banks.destroy', ':id') }}';
+                    var url = '{{ route('vaults.destroy', ':id') }}';
                     url = url.replace(':id', id);
                     var token = '{{ csrf_token() }}';
                     $.ajaxSetup({
