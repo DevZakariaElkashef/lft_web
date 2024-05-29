@@ -121,7 +121,8 @@ if(!function_exists('adminDbTablesPermissions')){
             'permissions',
             'transportations',
             'shipments',
-            'vaults'
+            'vaults',
+            'banks',
         ];
 
 
