@@ -15,6 +15,11 @@ class BankTrnsaction extends Model
     {
         return $this->belongsTo(Bank::class);
     }
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function getTypeNameAttribute()
     {

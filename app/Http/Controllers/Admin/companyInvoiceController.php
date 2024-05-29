@@ -19,11 +19,11 @@ class companyInvoiceController extends Controller
         $invoices = companyInvoices::query();
 
         if ($request->filled('from')) {
-            $invoices->whereDate('created_at', '>', $request->from);
+            $invoices->whereDate('created_at', '>=', $request->from);
         }
 
         if ($request->filled('to')) {
-            $invoices->whereDate('created_at', '<', $request->to);
+            $invoices->whereDate('created_at', '<=', $request->to);
         }
 
         $invoices = $invoices->where('company_id', $id)->get();

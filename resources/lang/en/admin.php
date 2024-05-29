@@ -416,5 +416,6 @@ return [
     'to' => 'To',
     "wallet" => 'Wallet',
     'note' => 'Note',
-    'export' => 'Export'
+    'export' => 'Export',
+    'bank' => 'Bank',
 ];

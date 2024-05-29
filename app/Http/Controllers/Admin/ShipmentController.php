@@ -25,11 +25,11 @@ class ShipmentController extends Controller
         $shipments = Shipment::query();
 
         if ($request->filled('date_from')) {
-            $shipments->whereDate('date', '>', $request->date_from);
+            $shipments->whereDate('date', '>=', $request->date_from);
         }
 
         if ($request->filled('date_to')) {
-            $shipments->whereDate('date', '<', $request->date_to);
+            $shipments->whereDate('date', '<=', $request->date_to);
         }
 
         $shipments = $shipments->where('car_id', $id)->get();

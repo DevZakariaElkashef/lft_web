@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\YardController;
 use App\Http\Controllers\Admin\AgentController;
 use App\Http\Controllers\Admin\BankController;
+use App\Http\Controllers\Admin\BankTransactionController;
 use App\Http\Controllers\Admin\VaultController;
 use App\Http\Controllers\Admin\DriverController;
 use App\Http\Controllers\Admin\ReportController;
@@ -239,14 +240,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
     // ----------------- \agents -----------------
 
     // ----------------- \agent car tranfer -----------------
-    Route::prefix('agent_car_transfer')->group(function () {
-        Route::post('/store', [AgentCarTranferController::class, 'store'])->name('agent_car_tranfer.store');
-        Route::get('/{id}', [AgentCarTranferController::class, 'index'])->name('agent_car_tranfer.index');
-        Route::get('/{id}/create', [AgentCarTranferController::class, 'create'])->name('agent_car_tranfer.create');
-        Route::get('/{id}/edit', [AgentCarTranferController::class, 'edit'])->name('agent_car_tranfer.edit');
-        Route::put('/{id}/update', [AgentCarTranferController::class, 'update'])->name('agent_car_tranfer.update');
-        Route::delete('/{id}/destroy', [AgentCarTranferController::class, 'destroy'])->name('agent_car_tranfer.destroy');
-        Route::get('/{id}/export', [AgentCarTranferController::class, 'export'])->name('agent_car_tranfer.export');
+    Route::prefix('banktransactions')->group(function () {
+        Route::post('/store', [BankTransactionController::class, 'store'])->name('banktransactions.store');
+        Route::get('/{id}', [BankTransactionController::class, 'index'])->name('banktransactions.index');
+        Route::get('/{id}/create', [BankTransactionController::class, 'create'])->name('banktransactions.create');
+        Route::get('/{id}/edit', [BankTransactionController::class, 'edit'])->name('banktransactions.edit');
+        Route::put('/{id}/update', [BankTransactionController::class, 'update'])->name('banktransactions.update');
+        Route::delete('/{id}/destroy', [BankTransactionController::class, 'destroy'])->name('banktransactions.destroy');
+        Route::get('/{id}/export', [BankTransactionController::class, 'export'])->name('banktransactions.export');
     });
     // ----------------- \agent car tranfer -----------------
 
@@ -270,6 +271,16 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
 
     // ----------------- banks -----------------
     Route::resource('banks', BankController::class);
+    Route::prefix('agent_car_transfer')->group(function () {
+        Route::post('/store', [AgentCarTranferController::class, 'store'])->name('agent_car_tranfer.store');
+        Route::get('/{id}', [AgentCarTranferController::class, 'index'])->name('agent_car_tranfer.index');
+        Route::get('/{id}/create', [AgentCarTranferController::class, 'create'])->name('agent_car_tranfer.create');
+        Route::get('/{id}/edit', [AgentCarTranferController::class, 'edit'])->name('agent_car_tranfer.edit');
+        Route::put('/{id}/update', [AgentCarTranferController::class, 'update'])->name('agent_car_tranfer.update');
+        Route::delete('/{id}/destroy', [AgentCarTranferController::class, 'destroy'])->name('agent_car_tranfer.destroy');
+        Route::get('/{id}/export', [AgentCarTranferController::class, 'export'])->name('agent_car_tranfer.export');
+    });
+
     // ----------------- banks -----------------
 
     // ----------------- cars -----------------

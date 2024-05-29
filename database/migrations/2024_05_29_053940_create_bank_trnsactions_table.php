@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('bank_trnsactions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bank_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->string('name')->nullable();
             $table->integer('type')->nullable()->comment('0 => Debit, 1 => Credit');
             $table->string('amount')->nullable();
             $table->string('image')->nullable();

@@ -28,7 +28,7 @@
                     <!--end::Button-->
                 </div>
                 <div class="">
-                   
+
                 </div>
             </div>
             <div class="bankd-body">
@@ -47,7 +47,9 @@
                             <tr>
                                 <th scope="row">{{ $bank->id }}</th>
                                 <td>
-                                    {{ $bank->name }}
+                                    <a href="{{ route('banktransactions.index', $bank->id) }}">
+                                        {{ $bank->name }}
+                                    </a>
                                 </td>
 
                                 <td>
