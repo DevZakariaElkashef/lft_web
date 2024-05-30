@@ -57,7 +57,15 @@ return [
     "credit" => "Credit",
     "bank_balance" => "Bank Balance",
     'banks' => "Banks",
-    "balance" => 'Balance'
+    "balance" => 'Balance',
+    "Tax_invoices" => "Tax Invoices",
+    "Navigation_line" => "Navigation Line",
+    "Certificate_Number" => "Certificate Number",
+    'Value_added_tax' => "Value Added Tax",
+    "General_tax" => "General tax",
+    "Total_invoice_before_tax" => 'Total invoice before tax',
+    "Total_invoice_after_tax" => 'Total invoice after tax',
+    'download_all_invoices' => 'Download Invoices',
     // ------------------ Main ------------------
 
 ];

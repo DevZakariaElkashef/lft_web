@@ -2,35 +2,18 @@
 
 namespace App\Models;
 
-use App\Mappers\ServiceCategoryStatusMapper;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use App\Mappers\ServiceCategoryStatusMapper;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Booking extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'company_id',
-        'employee_id',
-        'shipping_agent_id',
-
-        'company_json',
-        'employee_json',
-        'shipping_agent_json',
-
-        'booking_number',
-        'certificate_number',
-
-        'type_of_action',
-        'discharge_date',
-        'permit_end_date',
-        'employee_name',
-        'factory_id',
-        'yard_id'
-    ];
+    protected $guarded = ['id'];
 
     // protected $appends = ['taxedInvoice'];
 
@@ -39,6 +22,14 @@ class Booking extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+
+    
+
+
+
+
+
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -106,7 +97,13 @@ class Booking extends Model
 
     public function getTaxedInvoiceAttribute($value)
     {
-        return ($this->taxed == 0 ? __('admin.no') : __('admin.yes'));
+        return ($this->company->taxed == 0 ? __('admin.no') : __('admin.yes'));
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /** DEPRECATED: use call "transportation_total_price" instead */
@@ -261,6 +258,16 @@ class Booking extends Model
     {
         $query->when($tax_status, function (Builder $query) use ($tax_status) {
             $query->where('taxed', $tax_status);
+        });
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($post) {
+            // Set the user_id to the authenticated user's ID
+            if (Auth::check()) {
+                $post->user_id = Auth::id();
+            }
         });
     }
 }

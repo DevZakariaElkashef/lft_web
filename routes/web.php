@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\MoneyTransferController;
 use App\Http\Controllers\Admin\CompanyServicesController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
 use App\Http\Controllers\Admin\CompanyTransportationController;
+use App\Http\Controllers\Admin\InvoicesController;
 use App\Http\Controllers\Admin\ShipmentController;
 
 /*
@@ -132,6 +133,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Admin', 'middleware' => ['aut
 
     // ----------------- Bookings -----------------
     Route::resource('bookings', BookingController::class);
+
+    // invoices ----------------------------------------------------------------
+    Route::get('bookings-invoices/{id?}', [InvoicesController::class, 'index'])->name('bokkings.invoices');
+    Route::get('bookings-invoices-exports/{id?}', [InvoicesController::class, 'export'])->name('bookings.invoices.exports');
+    Route::get('/download-invoice/{companyId?}', [InvoicesController::class, 'downloadPDF'])->name('bookings.invoices.pdf');
+
+
+    // invoices ----------------------------------------------------------------
 
     Route::get("booking_papers/{booking}", [BookingController::class, "booking_papers"])->name("bookings.booking_papers");
     // ----------------- Booking Containers -----------------

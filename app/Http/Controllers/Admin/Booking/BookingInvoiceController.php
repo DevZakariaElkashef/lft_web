@@ -122,7 +122,6 @@ class BookingInvoiceController extends Controller
         // last page rows limit with footer only
         $lpr_limit = 8;
 
-        // defaults
         $booking = $booking_invoice->booking;
         $invoice_rows = $booking->bookingContainers
             ->concat($booking->getTaxedServices);
@@ -130,17 +129,9 @@ class BookingInvoiceController extends Controller
         $mps = [];
         $lpr = [];
 
-        // $invoice_rows->shift(53); // TEST
-        // $invoice_rows->shift(54); // TEST
-        // $invoice_rows->shift(59); // TEST
         $fpr = $invoice_rows->shift(
             count($invoice_rows) <= $fpr_hf_limit ? $fpr_hf_limit : $fpr_h_limit
         );
-
-
-        // $invoice_rows->shift(43); // TEST
-        // $invoice_rows->shift(44); // TEST
-        // $invoice_rows->shift(51); // TEST
 
         $mps_count = floor(count($invoice_rows) / $mpr_limit);
         $mps_modulus = count($invoice_rows) % $mpr_limit;
@@ -160,27 +151,7 @@ class BookingInvoiceController extends Controller
                 $mps[$key] = [$mp];
         if (!is_array($lpr) && !($lpr instanceof Collection))
             $lpr = [$lpr];
-
-        // dd(
-        //     count($fpr),
-        //     count(collect($mps)->flatten()),
-        //     count($lpr),
-        //     count($invoice_rows)
-        // );
-
-        // $attachment_rows
-        // if (all_rows <= 6)
-        //     put it all in the first page
-        // if (16 >= all_rows > 6)
-        //     put first & last page only
-        // if (all_rows > 16)
-        //     take 8 in the first page
-        //         subtract them from all_rows
-        //     take 10s in the middle pages
-        //     if(all_rows % 10 <= 8)
-        //         fill the last page table
-        //     else
-        //         don't fill the last page table
+        
         return view('admin.bookings.booking-invoices.show', [
             'invoice' => $booking_invoice,
             'fpr' => $fpr,
@@ -191,7 +162,7 @@ class BookingInvoiceController extends Controller
             'mpr_limit' => $mpr_limit,
             'lpr_limit' => $lpr_limit,
             'attachment_rows' => $booking->getUnTaxedServices
-        ]);
+        ])->render();
     }
 
     /**

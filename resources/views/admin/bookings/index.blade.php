@@ -171,8 +171,8 @@
                                 <td>{{ $booking?->factory?->name ?? '__' }}</td>
                                 <td>{{ $booking->booking_number }} </td>
                                 <td>
-                                    <span class="badge badge-{{ $booking->taxed == 0 ? 'danger' : 'success' }} text-white">
-                                        <i class="fa fa-{{ $booking->taxed == 0 ? 'xmark' : 'check' }} text-white"></i>
+                                    <span class="badge badge-{{ $booking->company->taxed == 0 ? 'danger' : 'success' }} text-white">
+                                        <i class="fa fa-{{ $booking->company->taxed == 0 ? 'xmark' : 'check' }} text-white"></i>
                                         {{ $booking->taxed_invoice }}
                                     </span>
                                 </td>

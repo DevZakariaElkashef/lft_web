@@ -79,6 +79,9 @@
                                             <i class="fa fa-{{ $company->taxed == 0 ? 'xmark' : 'check' }} text-white"></i>
                                             {{ $company->taxed_invoice }}
                                         </span>
+                                        <a class="mt-2" href="{{ route('bokkings.invoices', $company->id) }}">
+                                            {{ __('main.Tax_invoices') }}
+                                        </a>
                                     </td>
                                     <td>
                                         {{ $company->bill_type == 1 ? __('admin.bill_type_invoice') : __('admin.bill_type_statement') }}

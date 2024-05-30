@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\BookingServiceRequest;
 use App\Models\Booking;
 use App\Models\BookingService;
+use App\Models\Service;
 use App\Models\ServiceCategory;
 
 class BookingServiceController extends Controller
@@ -18,6 +19,7 @@ class BookingServiceController extends Controller
 
         // sending the view
         $service_types = ServiceCategory::all()->pluck('title', 'id');
+        $services = Service::get('id', 'title');
         $company_prices = $booking
             ->company
             ->services
@@ -32,6 +34,7 @@ class BookingServiceController extends Controller
                 ['booking' => $booking->id]
             ),
             'service_types' => $service_types,
+            'services' => $services,
             'company_prices' => $company_prices
         ];
         return view('admin.bookings.booking-services.create', $inputs);

@@ -83,8 +83,15 @@ return [
     'credit' => 'إيداع',
     "vault_balance" => 'ميزانية الخزنة',
     "banks" => 'البنوك',
-    "balance" => 'الرصيد'
-
+    "balance" => 'الرصيد',
+    "Tax_invoices" => 'الفواتير الضريبية',
+    "Navigation_line" => 'الخط الملاحى',
+    'Certificate_Number' => 'رقم الشهادة',
+    "Value_added_tax" => 'ضريبة القيمة المضافة',
+    "General_tax" => 'ضريبة عامة',
+    "Total_invoice_before_tax" => 'إجمالي الفاتورة قبل الضريبة',
+    'Total_invoice_after_tax' => 'اجمالي الفاتورة بعد الضريبة',
+    'download_all_invoices' => 'تحميل الفواتير'
 
 
 ];
