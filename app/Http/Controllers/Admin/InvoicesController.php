@@ -40,15 +40,17 @@ class InvoicesController extends Controller
 
 
 
-    public function export($id)
+    public function export($id = null)
     {
         $company = Company::findOrFail($id);
 
-        return view('admin.invoices.pdf', compact('company'));
+        $bookings = Booking::all();
+
+        return view('admin.invoices.pdf', compact('bookings'));
     }
 
 
-    public function downloadPDF(Request $request, $id)
+    public function downloadPDF(Request $request, $id = null)
     {
         $ids = explode(',', $request->ids);
         $bookings = Booking::whereIn('id', $ids)->get();
